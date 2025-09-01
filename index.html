@@ -7,6 +7,7 @@
     <title>Portfolio | Xcydeep - Développeur Backend</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <style>
 	
 	
@@ -508,46 +509,115 @@
             display: inline-block;
         }
 
-        .profile-img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid rgba(138, 99, 210, 0.3);
-            box-shadow: var(--card-shadow);
-            position: relative;
-            z-index: 2;
-            transition: var(--transition);
-        }
+       .profile-img {
+			width: 200px;
+			height: 300px;
+			border-radius: 50%;
+			object-fit: contain; /* dézoome l'image pour qu'elle soit entièrement visible */
+			border: none;
+			box-shadow: var(--card-shadow);
+			position: relative;
+			z-index: 2;
+			transition: var(--transition);
+		}
 
-        .profile-img-container::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            opacity: 0.2;
-            z-index: 1;
-            animation: pulse 3s infinite ease-in-out;
-        }
 
-        .profile-img-container::after {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: -20px;
-            bottom: -20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            opacity: 0.1;
-            z-index: 0;
-            animation: pulse 3s infinite ease-in-out;
-            animation-delay: 0.5s;
-        }
+  .profile-img-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Rectangles ondulants existants */
+.profile-img-container::before,
+.profile-img-container::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    opacity: 0.15;
+    z-index: -1;
+}
+
+.profile-img-container::before {
+    animation: pulse-vertical 4s infinite ease-in-out;
+}
+
+.profile-img-container::after {
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    border-radius: 25px;
+    opacity: 0.1;
+    animation: pulse-vertical-alt 6s infinite ease-in-out;
+    animation-delay: 0.5s;
+}
+
+/* Animation ondulante principale */
+@keyframes pulse-vertical {
+    0%, 100% { transform: scaleY(1); }
+    25% { transform: scaleY(1.05); }
+    50% { transform: scaleY(1.1); }
+    75% { transform: scaleY(1.05); }
+}
+
+@keyframes pulse-vertical-alt {
+    0%, 100% { transform: scaleY(1); }
+    20% { transform: scaleY(0.97); }
+    40% { transform: scaleY(1.03); }
+    60% { transform: scaleY(0.99); }
+    80% { transform: scaleY(1.02); }
+}
+
+/* Nouvelles lignes dorées derrière la photo */
+.profile-img-container .gold-lines {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;  /* largeur fine de la ligne */
+    height: 100%;
+    background: linear-gradient(to top, #bfa153, rgba(191, 161, 83, 0));
+    opacity: 0.4;
+    transform: translateX(-50%);
+    animation: rise-lines 5s infinite linear;
+    z-index: -2;
+}
+
+/* Créer plusieurs lignes avec before/after */
+.profile-img-container .gold-lines::before,
+.profile-img-container .gold-lines::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to top, #bfa153, rgba(191, 161, 83, 0));
+    opacity: 0.3;
+    left: -10px; /* décalage de ligne */
+    animation: rise-lines-alt 6s infinite linear;
+}
+
+.profile-img-container .gold-lines::after {
+    left: 10px; /* autre ligne décalée */
+    animation-duration: 7s;
+}
+
+/* Animation de montée douce */
+@keyframes rise-lines {
+    0% { transform: translateY(100%) translateX(-50%); opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { transform: translateY(-100%) translateX(-50%); opacity: 0; }
+}
+
+@keyframes rise-lines-alt {
+    0% { transform: translateY(100%); opacity: 0; }
+    50% { opacity: 0.4; }
+    100% { transform: translateY(-100%); opacity: 0; }
+}
+
 
         .profile-info {
             margin-top: 20px;
@@ -1488,7 +1558,8 @@
     transform: translate(-50%, -50%);
     color: #fff;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: clamp(0.6rem, 2.5vw, 0.95rem); /* s’adapte au mobile, tablette, PC */
+    white-space: nowrap; /* empêche le retour à la ligne */
 }
 
 
@@ -1632,6 +1703,24 @@
 }
 
 
+@keyframes gold-rise {
+    0% {
+        transform: translateY(100%) translateX(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(75%) translateX(5px) rotate(2deg);
+    }
+    50% {
+        transform: translateY(50%) translateX(-5px) rotate(-2deg);
+    }
+    75% {
+        transform: translateY(25%) translateX(5px) rotate(2deg);
+    }
+    100% {
+        transform: translateY(-100%) translateX(0px) rotate(0deg);
+    }
+}
+
 
 
     </style>
@@ -1699,7 +1788,7 @@
         <div class="container hero-content">
             <div class="hero-text">
                 <h1>Développeur Backend <span>Passionné</span></h1>
-                <p>Conception de systèmes backend performants et sécurisés, garantissant la fluidité des échanges de données et la résilience des applications.</p>
+                <p>Conception de systèmes backend performants et sécurisés, assurant une expérience utilisateur fluide et fiable.</p>
                 <div class="hero-buttons">
 					<a href="#projects" class="btn">Voir mes projets</a>
 					<a href="#contact" class="btn btn-outline">Me contacter</a>
@@ -1710,10 +1799,27 @@
             </div>
             <div class="hero-image">
                 <div class="profile-img-container">
-                    <img src="20250126_213548.jpg" alt="Photo de Xcydeep" class="profile-img" id="profile-img">
+                    <img src="img.png" alt="Photo de Xcydeep" class="profile-img" id="profile-img">
+					<div class="gold-lines"></div> 
                 </div>
                 <div class="profile-info">
-                    <h2>Ing. MAGOUMOUI SOMA BARTHELEMY</h2>
+                    <!-- Importation de la police rare et élégante depuis Google Fonts -->
+					
+					<h2 style="
+						font-family: 'Playfair Display', serif; /* police élégante et rare */
+						font-weight: 900; /* très gras pour le nom */
+						font-size: 1.5rem; /* taille compacte et lisible */
+						color: #bfa153; /* or foncé pour dark mode */
+						letter-spacing: 2px; /* espacement subtil pour élégance */
+						text-transform: uppercase; /* majuscules pour un effet pro */
+						line-height: 1.1;
+						margin: 0;
+						font-size: 1.1rem;
+						text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* léger relief pour lisibilité */
+					">
+						Ing. MAGOUMOUI SOMA BARTHELEMY
+					</h2>
+
                     <p>Développeur Backend & Architecte Logiciel</p>
                 </div>
             </div>
@@ -2231,6 +2337,34 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 500);
 });
 
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".profile-img-container");
+
+    // Créer un conteneur pour les lignes dorées dynamiques
+    const goldLinesContainer = document.createElement("div");
+    goldLinesContainer.classList.add("gold-lines");
+    container.appendChild(goldLinesContainer);
+
+    const linesCount = 5; // nombre de lignes
+    for (let i = 0; i < linesCount; i++) {
+        const line = document.createElement("div");
+        line.style.position = "absolute";
+        line.style.width = "2px";
+        line.style.height = "100%";
+        line.style.background = "linear-gradient(to top, #bfa153, rgba(191, 161, 83, 0))";
+        line.style.opacity = 0.2 + Math.random() * 0.3; // opacité aléatoire pour l'effet soft
+        line.style.left = `${20 + i * 15}px`; // position horizontale différente
+        line.style.top = "-100%"; // départ en bas
+
+        // Animation horizontale ondulante avec vitesse aléatoire
+        const duration = 5 + Math.random() * 3; // durée aléatoire entre 5s et 8s
+        line.style.animation = `gold-rise ${duration}s linear infinite`;
+        line.style.zIndex = "-2";
+
+        goldLinesContainer.appendChild(line);
+    }
 });
 
     </script>
