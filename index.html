@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <style>
 	
 	
@@ -22,6 +23,7 @@
     transform: translate(-50%, -50%);
     z-index: -1;
     pointer-events: none;
+    perspective: 1000px; /* profondeur pour rotations 3D */
 }
 
 /* Les cercles violets */
@@ -31,6 +33,8 @@
     background: radial-gradient(circle, var(--primary-color) 0%, var(--accent-color) 80%);
     opacity: 0.2;
     mix-blend-mode: screen;
+    filter: drop-shadow(0 0 8px rgba(155, 92, 255, 0.35));
+    will-change: transform; /* perf */
 }
 
 /* Répartition plus espacée et esthétique */
@@ -73,6 +77,14 @@
             --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             --hover-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
             --section-transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            /* 3D / Futuristic accents */
+            --neon-blue: #00e5ff;
+            --neon-violet: #9b5cff;
+            --neon-cyan: #46ffe2;
+            --glass-bg: rgba(20, 20, 35, 0.55);
+            --glass-border: rgba(155, 92, 255, 0.15);
+            --glow-strong: 0 0 20px rgba(155, 92, 255, 0.45), 0 0 40px rgba(0, 229, 255, 0.25);
+            --glow-soft: 0 0 10px rgba(155, 92, 255, 0.35), 0 0 18px rgba(0, 229, 255, 0.15);
         }
 
         * {
@@ -112,6 +124,7 @@
             height: 1px;
             transform-origin: left center;
             animation: lineAppear 20s infinite linear;
+    will-change: transform, opacity; /* perf */
         }
 
         @keyframes lineAppear {
@@ -219,7 +232,7 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(138, 99, 210, 0.25);
+            box-shadow: 0 4px 12px rgba(138, 99, 210, 0.25), var(--glow-soft);
             font-size: 0.95rem;
             letter-spacing: 0.5px;
         }
@@ -236,8 +249,8 @@
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(138, 99, 210, 0.35);
+            transform: translateY(-3px) translateZ(10px);
+            box-shadow: 0 8px 20px rgba(138, 99, 210, 0.35), var(--glow-strong);
         }
 
         .btn:hover::before {
@@ -651,7 +664,7 @@
         }
 
         .skill-category {
-            background-color: rgba(15, 15, 27, 0.6);
+            background-color: var(--glass-bg);
             padding: 25px;
             border-radius: 15px;
             box-shadow: var(--card-shadow);
@@ -659,8 +672,9 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-            border: 1px solid rgba(138, 99, 210, 0.1);
+            border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
         }
 
         .skill-category::before {
@@ -676,8 +690,8 @@
         }
 
         .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
+            transform: translateY(-5px) rotateX(3deg) rotateY(-3deg);
+            box-shadow: var(--hover-shadow), var(--glow-soft);
         }
 
         .skill-category:hover::before {
@@ -728,22 +742,24 @@
             gap: 25px;
             position: relative;
             z-index: 1;
+            perspective: 1000px;
         }
 
         .project-card {
-            background-color: rgba(15, 15, 27, 0.6);
+            background-color: var(--glass-bg);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--card-shadow);
             transition: var(--transition);
             position: relative;
-            border: 1px solid rgba(138, 99, 210, 0.1);
+            border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
+            transform: translateY(-5px) rotateX(3deg) rotateY(-3deg);
+            box-shadow: var(--hover-shadow), var(--glow-soft);
         }
 
         .project-img-container {
@@ -856,6 +872,7 @@
             position: relative;
             max-width: 850px;
             margin: 0 auto;
+            perspective: 1000px;
         }
 
         .timeline::after {
@@ -888,18 +905,19 @@
 
         .timeline-content {
             padding: 22px;
-            background-color: rgba(15, 15, 27, 0.6);
+            background-color: var(--glass-bg);
             border-radius: 12px;
             box-shadow: var(--card-shadow);
             transition: var(--transition);
             position: relative;
-            border: 1px solid rgba(138, 99, 210, 0.1);
+            border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
         }
 
         .timeline-content:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--hover-shadow);
+            transform: translateY(-3px) rotateX(3deg) rotateY(-2deg);
+            box-shadow: var(--hover-shadow), var(--glow-soft);
         }
 
         .timeline-content h3 {
@@ -953,8 +971,87 @@
             position: relative;
             z-index: 1;
             transition: var(--transition);
-            border: 1px solid rgba(138, 99, 210, 0.1);
+            border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
+        }
+
+        /* Certifications 3D Slider (soft, swipe, buttons) */
+        .certifications-3d {
+            position: relative;
+            margin: 0 auto 42px;
+            height: 400px;
+            max-width: 100vw;
+            perspective: 1000px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .certs-rail {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            gap: 32px;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        .cert-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-bg);
+            border: 2.2px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.15), 0 0 32px var(--accent-color);
+            transform: perspective(900px) translateZ(0) rotateY(0deg);
+            transition: transform 0.6s cubic-bezier(.7,.2,.25,1), box-shadow 0.6s;
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+            flex: 0 1 430px;
+            height: 340px;
+            width:420px;
+            max-width: 98vw;
+            margin:0 8px;
+        }
+        .cert-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            aspect-ratio: 16/10;
+            background: #10101a;
+            padding: 22px 0;
+            border-radius: 16px;
+        }
+        .cert-card:hover {
+            transform: perspective(900px) translateZ(20px) rotateY(-4deg) rotateX(2deg);
+            box-shadow: var(--hover-shadow), var(--glow-strong);
+        }
+        .certs-controls {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            pointer-events: none;
+        }
+        .certs-controls .btn {
+            pointer-events: all;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--neon-violet), var(--neon-blue));
+        }
+        @media (max-width: 768px) {
+            .certifications-3d { height: 240px; }
+            .cert-card { flex-basis: 90%; }
+        }
+        @media (max-width: 480px) {
+            .certifications-3d { height: 220px; }
+            .cert-card { flex-basis: 100%; }
         }
 
         .education-content:hover {
@@ -970,7 +1067,7 @@
         }
 
         .education-item:hover {
-            transform: translateX(8px);
+            transform: translateX(8px) translateZ(10px) rotateY(-2deg);
         }
 
         .education-item:last-child {
@@ -1527,7 +1624,7 @@
     }
 
     .btn-cv i {
-        color: black;             /* couleur différente pour l’icône */
+        color: black;             /* couleur différente pour l'icône */
     }
 }
 
@@ -1558,7 +1655,7 @@
     transform: translate(-50%, -50%);
     color: #fff;
     font-weight: 500;
-    font-size: clamp(0.6rem, 2.5vw, 0.95rem); /* s’adapte au mobile, tablette, PC */
+    font-size: clamp(0.6rem, 2.5vw, 0.95rem); /* s'adapte au mobile, tablette, PC */
     white-space: nowrap; /* empêche le retour à la ligne */
 }
 
@@ -1726,14 +1823,7 @@
     </style>
 </head>
 
-<script>
-  const hamburger = document.getElementById("hamburger");
-  const navList = document.getElementById("nav-list");
 
-  hamburger.addEventListener("click", () => {
-    navList.classList.toggle("active");
-  });
-</script>
 
 <body>
     <!-- Arrière-plan avec lignes -->
@@ -1758,6 +1848,7 @@
 			  <li><a href="#projects"><i class="fas fa-folder-open"></i> Projets</a></li>
 			  <li><a href="#experience"><i class="fas fa-briefcase"></i> Expérience</a></li>
 			  <li><a href="#education"><i class="fas fa-graduation-cap"></i> Formation</a></li>
+              <li><a href="#certifications"><i class="fas fa-certificate"></i> Certifications</a></li>
 			  <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
 			  <li>
 				<div class="cv-button">
@@ -1988,7 +2079,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Ma Formation</h2>
-                <p>Mon parcours académique et mes certifications.</p>
+                <p>Mon parcours académique.</p>
             </div>
             <div class="education-content">
                 <div class="education-item">
@@ -2007,6 +2098,28 @@
                     <p>Connaissances fondamentales sur les outils numériques et leur utilisation optimale.</p>
                 </div>
 				
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications (section séparée) -->
+    <section class="section" id="certifications">
+        <div class="section-divider"></div>
+        <div class="container">
+            <div class="section-title" style="margin-bottom:32px;">
+                <h2 style="font-family: 'Orbitron',sans-serif;letter-spacing:2.5px;font-size:2.3rem;margin-bottom:20px;">Certifications</h2>
+                <p style="color:var(--gray-color);font-size:1rem;max-width:600px;margin:0 auto 3px auto;font-weight:300;">Mes preuves de réussite dans divers programmes.</p>
+            </div>
+            <div class="cert-gallery-row" style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start;">
+                <div class="cert-card cert-gallery-item">
+                   <img src="fc6bda7d-08b1-4e67-8410-2c4ddb6e15df.jpg" alt="Certification A">
+                </div>
+                <div class="cert-card cert-gallery-item">
+                   <img src="73c1cdf1-e726-4af5-b6f6-842ffd7c0e5d.jpg" alt="Certification B">
+                </div>
+                <div class="cert-card cert-gallery-item">
+                   <img src="8cfe4772-acdd-40ae-8f38-c06411c10e69.jpg" alt="Certification C">
+                </div>
             </div>
         </div>
     </section>
@@ -2205,7 +2318,9 @@
             setupMobileNavigation();
             setupHeaderScroll();
             setupSectionAnimations();
-            setupContactForm();
+            setupParallaxSections();
+            setupTiltOnCards();
+            setupCertificationsSlider();
         });
 		
 		
@@ -2415,6 +2530,291 @@ document.addEventListener("DOMContentLoaded", () => {
         goldLinesContainer.appendChild(line);
     }
 });
+// Three.js Certifications Carousel
+/* Three.js removed per user's request; using CSS/JS slider version */
+function setupCertificationsThree() {
+    const mount = document.getElementById('cert3d');
+    return; // no-op
+    const label = document.getElementById('certLabel');
+
+    const width = mount.clientWidth;
+    const height = mount.clientHeight;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000);
+    scene.fog = new THREE.FogExp2(0x000000, 0.008);
+
+    const camera = new THREE.PerspectiveCamera(55, width/height, 0.1, 2000);
+    camera.position.set(0, 0.5, 7.5);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(width, height);
+    // Color space compatibility (r150+ vs legacy)
+    if ('outputColorSpace' in renderer) {
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+    } else if ('outputEncoding' in renderer) {
+        renderer.outputEncoding = THREE.sRGBEncoding;
+    }
+    mount.appendChild(renderer.domElement);
+    camera.lookAt(0,0,0);
+
+    // Lights (violet + cyan)
+    const dirViolet = new THREE.DirectionalLight(0x8b5cf6, 1.2);
+    dirViolet.position.set(-3, 2, 2);
+    scene.add(dirViolet);
+    const dirCyan = new THREE.DirectionalLight(0x00ffff, 1.1);
+    dirCyan.position.set(3, 1, -2);
+    scene.add(dirCyan);
+    const ambient = new THREE.AmbientLight(0x222244, 0.6);
+    scene.add(ambient);
+
+    // Particles background
+    const particles = new THREE.BufferGeometry();
+    const count = 600;
+    const pos = new Float32Array(count * 3);
+    for (let i=0;i<count;i++){ pos[3*i] = (Math.random()-0.5)*20; pos[3*i+1]=(Math.random()-0.5)*12; pos[3*i+2]=(Math.random()-0.5)*20; }
+    particles.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const pMat = new THREE.PointsMaterial({ color: 0x7fffff, size: 0.02, transparent:true, opacity:0.4, depthWrite:false });
+    const points = new THREE.Points(particles, pMat);
+    scene.add(points);
+
+    // Materials (holographic)
+    const cardMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.25, metalness: 0.7, envMapIntensity: 1.0 });
+    const borderMat = new THREE.MeshBasicMaterial({ color: 0x00ffff, transparent:true, opacity:0.35, side: THREE.DoubleSide });
+
+    // Load textures from images
+    const loader = new THREE.TextureLoader();
+    loader.setCrossOrigin('anonymous');
+    const sources = [
+        { src: 'fc6bda7d-08b1-4e67-8410-2c4ddb6e15df.jpg', label: 'Certification 1' },
+        { src: '73c1cdf1-e726-4af5-b6f6-842ffd7c0e5d.jpg', label: 'Certification 2' },
+        { src: '8cfe4772-acdd-40ae-8f38-c06411c10e69.jpg', label: 'Certification 3' }
+    ];
+    // Preload textures with error handling and placeholders
+    function preloadTextures() {
+        return Promise.all(sources.map((s) => new Promise((resolve) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+                const tex = new THREE.Texture(img);
+                tex.needsUpdate = true;
+                if ('colorSpace' in tex) tex.colorSpace = THREE.SRGBColorSpace; else tex.encoding = THREE.sRGBEncoding;
+                tex.anisotropy = Math.min(16, renderer.capabilities.getMaxAnisotropy?.() || 8);
+                tex.generateMipmaps = true; tex.minFilter = THREE.LinearMipmapLinearFilter; tex.magFilter = THREE.LinearFilter;
+                resolve({ texture: tex, label: s.label });
+            };
+            img.onerror = () => {
+                // Canvas placeholder with filename hint
+                const canvas = document.createElement('canvas');
+                canvas.width = 800; canvas.height = 500;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#0b0b14'; ctx.fillRect(0,0,800,500);
+                ctx.fillStyle = '#00ffff'; ctx.font = 'bold 28px Orbitron, Arial'; ctx.textAlign = 'center';
+                ctx.fillText('Image non trouvée', 400, 230);
+                const tex = new THREE.CanvasTexture(canvas);
+                if ('colorSpace' in tex) tex.colorSpace = THREE.SRGBColorSpace; else tex.encoding = THREE.sRGBEncoding;
+                resolve({ texture: tex, label: s.label });
+            };
+            img.src = s.src;
+        })));
+    }
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const cards = [];
+    const radius = 4.8;
+    const aspect = 16/10; // assure qu'on voit bien haut/bas
+    const h = 2.4; // taille ajustée pour garantir visibilité
+    const w = h * aspect;
+
+    preloadTextures().then((items) => {
+        items.forEach((item, i) => {
+            const geo = new THREE.PlaneGeometry(w, h, 1, 1);
+            const mesh = new THREE.Mesh(geo, cardMat.clone());
+            const picture = new THREE.Mesh(new THREE.PlaneGeometry(w*0.98, h*0.98), new THREE.MeshBasicMaterial({ map: item.texture, side: THREE.DoubleSide }));
+            picture.position.z = 0.01;
+            mesh.add(picture);
+
+            const border = new THREE.Mesh(new THREE.PlaneGeometry(w*1.02, h*1.02), borderMat.clone());
+            border.position.z = -0.01;
+            mesh.add(border);
+
+            const angle = (i / items.length) * Math.PI * 2;
+            mesh.position.set(Math.cos(angle)*radius, 0, Math.sin(angle)*radius);
+            mesh.lookAt(0, 0, 0);
+            mesh.userData = { label: sources[i].label };
+            cards.push(mesh);
+            group.add(mesh);
+        });
+    });
+
+    // Post-processing (Bloom + DOF)
+    const composer = new THREE.EffectComposer(renderer);
+    composer.addPass(new THREE.RenderPass(scene, camera));
+    const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(width, height), 0.6, 0.8, 0.1);
+    composer.addPass(bloom);
+    const bokeh = new THREE.BokehPass(scene, camera, { focus: 6.0, aperture: 0.0015, maxblur: 0.015, width, height });
+    composer.addPass(bokeh);
+
+    // Interaction raycaster
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let hovered = null;
+    const onPointerMove = (e) => {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    };
+    renderer.domElement.addEventListener('pointermove', onPointerMove);
+
+    // Autoplay rotation + scroll horizontal (wheel)
+    let auto = true;
+    renderer.domElement.addEventListener('mouseenter', () => { auto = false; });
+    renderer.domElement.addEventListener('mouseleave', () => { auto = true; });
+    renderer.domElement.addEventListener('wheel', (e) => {
+        group.rotation.y += (e.deltaY > 0 ? 1 : -1) * 0.15;
+    }, { passive: true });
+
+    // Subtle hover sound (optional)
+    let audioCtx; let hoverOsc;
+    function playHover(){
+        try {
+            audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+            hoverOsc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            hoverOsc.type = 'sine';
+            hoverOsc.frequency.value = 680;
+            gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.02, audioCtx.currentTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.25);
+            hoverOsc.connect(gain).connect(audioCtx.destination);
+            hoverOsc.start();
+            setTimeout(() => hoverOsc.stop(), 300);
+        } catch(_){}
+    }
+
+    // Animate
+    function animate(){
+        requestAnimationFrame(animate);
+        if (auto) group.rotation.y += 0.0035;
+
+        // glow/zoom on hover
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(cards, true);
+        const hit = intersects.length ? intersects[0].object.parent : null;
+        if (hit !== hovered){
+            if (hovered){ hovered.scale.set(1,1,1); hovered.children[1].material.opacity = 0.35; }
+            hovered = hit;
+            if (hovered){ hovered.scale.set(1.06,1.06,1.06); hovered.children[1].material.opacity = 0.85; playHover(); label.style.display='block'; label.textContent = hovered.userData.label; }
+            else { label.style.display='none'; }
+        }
+
+        composer.render();
+    }
+    animate();
+
+    // Resize
+    window.addEventListener('resize', () => {
+        const w = mount.clientWidth, h = mount.clientHeight;
+        camera.aspect = w/h; camera.updateProjectionMatrix();
+        renderer.setSize(w,h); composer.setSize(w,h);
+    });
+}
+
+// Parallax léger sur sections
+function setupParallaxSections() {
+    const sections = document.querySelectorAll('.section, .hero');
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        sections.forEach(sec => {
+            const depth = 0.05; // parallax doux
+            const translate = (sec.getBoundingClientRect().top + scrollY) * depth * -0.02;
+            sec.style.transform = `translateZ(0) translateY(${translate}px)`;
+        });
+    }, { passive: true });
+}
+
+// Tilt 3D au survol pour cartes
+function setupTiltOnCards() {
+    const tiltSelectors = ['.skill-category', '.project-card', '.timeline-content', '.education-item'];
+    const cards = document.querySelectorAll(tiltSelectors.join(','));
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const rotateY = ((x / rect.width) - 0.5) * 8;
+            const rotateX = -((y / rect.height) - 0.5) * 8;
+            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+}
+
+// Positionne les éléments du carrousel de certifications sur un cercle 3D
+// Slider 3D doux (rail) avec boutons et swipe
+function setupCertificationsSlider() {
+    const rail = document.getElementById('certsRail');
+    if (!rail) return;
+    const cards = Array.from(rail.querySelectorAll('.cert-card'));
+    let index = 0;
+    let autoplayTimer = null;
+
+    const apply = () => {
+        const w = rail.clientWidth;
+        // repositionner le rail pour centrer la carte active
+        const base = (w * 0.1); // marge visuelle
+        rail.style.transform = `translateX(calc(50% - ${(index + 0.5) * (cards[0].clientWidth + 20)}px))`;
+
+        cards.forEach((card, i) => {
+            const offset = (i - index);
+            const rotateY = -offset * 14;
+            const translateZ = -Math.abs(offset) * 80 + (offset === 0 ? 40 : 0);
+            card.style.transform = `perspective(1000px) rotateY(${rotateY}deg) translateZ(${translateZ}px)`;
+            card.style.opacity = Math.max(0.15, 1 - Math.abs(offset) * 0.35);
+        });
+    };
+
+    const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
+    const go = (dir) => {
+        index = clamp(index + dir, 0, cards.length - 1);
+        apply();
+    };
+
+    // Swipe
+    let startX = 0; let dragging = false;
+    rail.addEventListener('pointerdown', (e) => { dragging = true; startX = e.clientX; rail.setPointerCapture(e.pointerId); });
+    rail.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) > 40) {
+            go(dx < 0 ? 1 : -1);
+            dragging = false;
+        }
+    });
+    window.addEventListener('pointerup', () => { dragging = false; });
+    window.addEventListener('resize', apply, { passive: true });
+
+    // autoplay doux
+    const startAutoplay = () => {
+        if (autoplayTimer) return;
+        autoplayTimer = setInterval(() => {
+            index = (index + 1) % cards.length;
+            apply();
+        }, 1600);
+    };
+    const stopAutoplay = () => { if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; } };
+    const restartAutoplay = () => { stopAutoplay(); startAutoplay(); };
+    rail.closest('.certifications-3d').addEventListener('mouseenter', stopAutoplay);
+    rail.closest('.certifications-3d').addEventListener('mouseleave', startAutoplay);
+
+    apply();
+    startAutoplay();
+}
 
     </script>
 </body>
