@@ -1818,248 +1818,90 @@
     }
 }
 
-
-/* Certifications Slider - Un seul cadre */
-.certifications-slider {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    height: 500px;
-    overflow: hidden;
-    border-radius: 20px;
-}
-
-.slider-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.slider-track {
-    display: flex;
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    height: 100%;
-}
-
-.slide {
-    min-width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.single-cert-card {
-    width: 100%;
-    height: 100%;
-    background: var(--glass-bg);
-    border: 2.2px solid var(--glass-border);
-    border-radius: 20px;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.15), 0 0 32px var(--accent-color);
-    overflow: hidden;
-    backdrop-filter: blur(16px);
-    transition: var(--transition);
-}
-
-.single-cert-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--hover-shadow), var(--glow-strong);
-}
-
-.single-cert-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #10101a;
-    padding: 40px;
-}
-
-.slider-dots {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-    z-index: 10;
-}
-
-.slider-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.slider-dot.active {
-    background: var(--primary-color);
-    transform: scale(1.2);
-}
-
-@media (max-width: 768px) {
-    .certifications-slider {
-        height: 400px;
-    }
-}
-
-@media (max-width: 480px) {
-    .certifications-slider {
-        height: 300px;
-    }
-    .single-cert-card img {
-        padding: 20px;
-    }
-}
-
-
-
-.slider-container {
-  scroll-behavior: smooth;
-  touch-action: pan-y;
-}
-
-
-/* Certifications Slider - Un seul cadre */
-.certifications-slider {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    height: 500px;
-    overflow: hidden;
-    border-radius: 20px;
-}
-
-.slider-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.slider-track {
-    display: flex;
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    height: 100%;
-}
-
-.slide {
-    min-width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.single-cert-card {
-    width: 100%;
-    height: 100%;
-    background: var(--glass-bg);
-    border: 2.2px solid var(--glass-border);
-    border-radius: 20px;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.15), 0 0 32px var(--accent-color);
-    overflow: hidden;
-    backdrop-filter: blur(16px);
-    transition: var(--transition);
-}
-
-.single-cert-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--hover-shadow), var(--glow-strong);
-}
-
-.single-cert-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #10101a;
-    padding: 40px;
-}
-
-.slider-dots {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-    z-index: 10;
-}
-
-.slider-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.slider-dot.active {
-    background: var(--primary-color);
-    transform: scale(1.2);
-}
-
-@media (max-width: 768px) {
-    .certifications-slider {
-        height: 400px;
-    }
-}
-
-@media (max-width: 480px) {
-    .certifications-slider {
-        height: 300px;
-    }
-    .single-cert-card img {
-        padding: 20px;
-    }
-}
-
-
-/* === Cadre décoratif façon lustre baroque === */
-.certifications-slider::before {
-  content: "";
-  position: absolute;
-  inset: -40px; /* élargit le cadre autour */
-  z-index: 2;
-  background: url("58db28cb-93a1-45d8-b2ef-cdfe5d865fee.png") no-repeat center;
-  background-size: contain;
-  opacity: 0.9;
-  pointer-events: none;
-  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
-}
-
+/* === Certifications Slider épuré et 3D fluide === */
 .certifications-slider {
   position: relative;
-  border-radius: 50%;
+  max-width: 900px;
+  margin: 0 auto;
+  height: 480px;
   overflow: hidden;
-  background-color: rgba(10, 10, 15, 0.95);
-  box-shadow:
-    inset 0 0 40px rgba(0, 0, 0, 0.9),
-    0 0 60px rgba(0, 0, 0, 0.5);
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
+/* Container */
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+}
+
+/* Rail de slides */
 .slider-track {
   display: flex;
-  transition: transform 1.1s cubic-bezier(0.33, 1, 0.68, 1);
   height: 100%;
+  transition: transform 1.1s cubic-bezier(0.33, 1, 0.68, 1);
   will-change: transform;
   backface-visibility: hidden;
   transform-style: preserve-3d;
 }
 
+/* Slide individuel */
+.slide {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Carte d’image */
+.single-cert-card {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+/* Image de certification */
 .single-cert-card img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background: #10101a;
-  padding: 40px;
-  backface-visibility: hidden;
+  border-radius: 20px;
   transform: translateZ(0);
-  will-change: opacity, transform;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
+
+/* Effet de survol léger */
+.single-cert-card:hover {
+  transform: scale(1.03) rotateY(2deg) translateZ(30px);
+}
+
+/* Retire totalement les points (dots) */
+.slider-dots {
+  display: none !important;
+}
+
+/* Adaptation mobile */
+@media (max-width: 768px) {
+  .certifications-slider {
+    height: 380px;
+  }
+}
+@media (max-width: 480px) {
+  .certifications-slider {
+    height: 280px;
+  }
+}
+
 
 
 
