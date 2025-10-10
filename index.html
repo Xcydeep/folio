@@ -1916,46 +1916,11 @@
 
 
 
-donne moi le javascrit pour faire slider ceci de facon soft pro, et futuriste et 3d, et aussi le cadre faire sa comme un lustre (le cadre dans lequel il y'a la certification dans laquel elle vont slider un lustre en or avec de motif bien fais des croissement avec des vide on diorasi une certification encadreer reel ou les certifuication vont slider , donne juste quioi ajouter 
+.slider-container {
+  scroll-behavior: smooth;
+  touch-action: pan-y;
+}
 
-   <!-- Certifications (section séparée) -->
-   <!-- Certifications Section -->
-<section class="section" id="certifications">
-    <div class="section-divider"></div>
-    <div class="container">
-        <div class="section-title" style="margin-bottom:32px;">
-            <h2 style="font-family: 'Orbitron',sans-serif;letter-spacing:2.5px;font-size:2.3rem;margin-bottom:20px;">Certifications</h2>
-            <p style="color:var(--gray-color);font-size:1rem;max-width:600px;margin:0 auto 3px auto;font-weight:300;">Mes preuves de réussite dans divers programmes.</p>
-        </div>
-        
-        <div class="certifications-slider">
-            <div class="slider-container">
-                <div class="slider-track" id="certSliderTrack">
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="fc6bda7d-08b1-4e67-8410-2c4ddb6e15df.jpg" alt="Certification 1">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="73c1cdf1-e726-4af5-b6f6-842ffd7c0e5d.jpg" alt="Certification 2">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="8cfe4772-acdd-40ae-8f38-c06411c10e69.jpg" alt="Certification 3">
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-dots" id="certDots">
-                    <div class="slider-dot active" data-slide="0"></div>
-                    <div class="slider-dot" data-slide="1"></div>
-                    <div class="slider-dot" data-slide="2"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 /* Certifications Slider - Un seul cadre */
 .certifications-slider {
@@ -2075,6 +2040,27 @@ donne moi le javascrit pour faire slider ceci de facon soft pro, et futuriste et
     inset 0 0 40px rgba(0, 0, 0, 0.9),
     0 0 60px rgba(0, 0, 0, 0.5);
 }
+
+.slider-track {
+  display: flex;
+  transition: transform 1.1s cubic-bezier(0.33, 1, 0.68, 1);
+  height: 100%;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.single-cert-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #10101a;
+  padding: 40px;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: opacity, transform;
+}
+
 
 
 
@@ -3128,6 +3114,14 @@ document.addEventListener("DOMContentLoaded", () => {
   goToSlide(0);
   startAutoSlide();
 });
+
+
+// Précharge toutes les images avant le début du slide
+document.querySelectorAll('.single-cert-card img').forEach(img => {
+  const preload = new Image();
+  preload.src = img.src;
+});
+
 
 
 
