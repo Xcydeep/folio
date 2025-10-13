@@ -1923,6 +1923,54 @@
   }
 }
 
+
+
+
+
+
+/* Styles pour les dots du slider de certifications */
+.slider-dots {
+    display: flex !important;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+    position: relative;
+    z-index: 10;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(155, 92, 255, 0.5);
+}
+
+.slider-dot.active {
+    background-color: var(--accent-color);
+    transform: scale(1.2);
+    box-shadow: 0 0 8px rgba(155, 92, 255, 0.7);
+}
+
+.slider-dot:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Adaptation mobile */
+@media (max-width: 768px) {
+    .slider-dots {
+        margin-top: 20px;
+    }
+    
+    .slider-dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
     </style>
 </head>
 
@@ -2984,6 +3032,70 @@ document.addEventListener("DOMContentLoaded", () => {
 document.querySelectorAll('.single-cert-card img').forEach(img => {
   const preload = new Image();
   preload.src = img.src;
+});
+
+
+
+
+
+
+
+// Fonction pour générer automatiquement les dots de certification
+function setupCertificationDots() {
+    const sliderTrack = document.getElementById('certSliderTrack');
+    const dotsContainer = document.getElementById('certDots');
+    
+    if (!sliderTrack || !dotsContainer) return;
+    
+    // Compter le nombre de slides
+    const slides = sliderTrack.querySelectorAll('.slide');
+    
+    // Vider les dots existants
+    dotsContainer.innerHTML = '';
+    
+    // Créer un dot pour chaque slide
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'slider-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.setAttribute('data-slide', index);
+        
+        // Ajouter l'événement de clic
+        dot.addEventListener('click', () => {
+            goToSlide(index);
+        });
+        
+        dotsContainer.appendChild(dot);
+    });
+}
+
+// Modifier la fonction goToSlide pour gérer les dots
+function goToSlide(index) {
+    const track = document.getElementById('certSliderTrack');
+    const dots = document.querySelectorAll('#certDots .slider-dot');
+    const slides = document.querySelectorAll('.slide');
+    
+    if (!track || slides.length === 0) return;
+    
+    currentIndex = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    // Mettre à jour les dots
+    dots.forEach((dot, i) => dot.classList.toggle('active", i === currentIndex));
+}
+
+// Appeler cette fonction après le chargement du DOM
+document.addEventListener('DOMContentLoaded', () => {
+    setupCertificationDots();
+    
+    // Le reste de votre code d'initialisation...
+    createBackgroundLines();
+    setupMobileNavigation();
+    setupHeaderScroll();
+    setupSectionAnimations();
+    setupParallaxSections();
+    setupTiltOnCards();
+    setupCertificationsSlider();
 });
 
 
