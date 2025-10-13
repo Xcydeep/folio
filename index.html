@@ -2994,6 +2994,31 @@ document.querySelectorAll('.single-cert-card img').forEach(img => {
 });
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".slide");
+  const dotsContainer = document.getElementById("certDots");
+
+  // Vider les dots existants
+  dotsContainer.innerHTML = "";
+
+  // Créer un dot par slide
+  slides.forEach((slide, i) => {
+    const dot = document.createElement("div");
+    dot.classList.add("slider-dot");
+    if (i === 0) dot.classList.add("active"); // Le premier actif
+    dot.dataset.slide = i;
+    dotsContainer.appendChild(dot);
+
+    // Ajouter la navigation au clic
+    dot.addEventListener("click", () => {
+      document.getElementById("certSliderTrack").style.transform = `translateX(-${i * 100}%)`;
+      dotsContainer.querySelectorAll(".slider-dot").forEach(d => d.classList.remove("active"));
+      dot.classList.add("active");
+    });
+  });
+});
+
+
 
 
 
