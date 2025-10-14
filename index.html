@@ -2887,9 +2887,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// === SLIDER 3D FUTURISTE SOBRE ===
 function setupCertificationsSliderAlt() {
-  console.log("🌙 Initialisation du slider 3D sobre...");
+  console.log("🌙 Initialisation du slider 3D corrigé...");
 
   const track = document.getElementById("certSliderTrackAlt");
   const slides = document.querySelectorAll(".slide-alt");
@@ -2908,166 +2907,89 @@ function setupCertificationsSliderAlt() {
     dot.classList.add("slider-dotmark-alt");
     if (i === 0) dot.classList.add("active");
     dot.setAttribute("data-index", i);
+    dot.addEventListener("click", () => goToSlide(i));
     dotsContainer.appendChild(dot);
   });
-
   const dots = document.querySelectorAll(".slider-dotmark-alt");
 
-  // 🔹 Effets 3D sobres violet/noir
-  const subtle3DEffects = {
-    ghostSlide: {
-      in: {
-        transform: 'translateX(0) scale(1) rotateY(0deg)',
-        opacity: '1',
-        filter: 'brightness(1)'
-      },
-      out: {
-        transform: 'translateX(-100%) scale(0.9) rotateY(-15deg)',
-        opacity: '0',
-        filter: 'brightness(0.7)'
-      },
-      duration: 1200
-    },
-    depthFade: {
-      in: {
-        transform: 'scale(1) translateZ(0px) rotateX(0deg)',
-        opacity: '1',
-        filter: 'brightness(1)'
-      },
-      out: {
-        transform: 'scale(0.85) translateZ(-80px) rotateX(10deg)',
-        opacity: '0',
-        filter: 'brightness(0.6)'
-      },
-      duration: 1300
-    },
-    softRotate: {
-      in: {
-        transform: 'scale(1) rotateY(0deg) translateZ(0px)',
-        opacity: '1',
-        filter: 'brightness(1)'
-      },
-      out: {
-        transform: 'scale(0.9) rotateY(25deg) translateZ(-60px)',
-        opacity: '0',
-        filter: 'brightness(0.8)'
-      },
-      duration: 1100
-    },
-    gentleFloat: {
-      in: {
-        transform: 'scale(1) translateY(0px) rotateZ(0deg)',
-        opacity: '1',
-        filter: 'brightness(1)'
-      },
-      out: {
-        transform: 'scale(0.88) translateY(30px) rotateZ(-5deg)',
-        opacity: '0',
-        filter: 'brightness(0.75)'
-      },
-      duration: 1400
-    },
-    matrixFlow: {
-      in: {
-        transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
-        opacity: '1',
-        filter: 'brightness(1)'
-      },
-      out: {
-        transform: 'matrix3d(0.95,0.05,0,0,0,0.95,0,0,0,0,1,0,0,0,0,1)',
-        opacity: '0',
-        filter: 'brightness(0.7)'
-      },
-      duration: 1250
-    }
-  };
+  // 🔹 Effets 3D aléatoires
+  const subtle3DEffects = [
+    {scale: 1, rotateY: 0, translateZ: 0, translateY: 0},
+    {scale: 1.02, rotateY: 5, translateZ: 20, translateY: -5},
+    {scale: 0.98, rotateY: -5, translateZ: 15, translateY: 3},
+    {scale: 1, rotateY: 8, translateZ: 10, translateY: -2},
+    {scale: 1.01, rotateY: -6, translateZ: 18, translateY: 4}
+  ];
 
-  // 🔹 Sélection d'effet aléatoire
-  function getRandom3DEffect() {
-    const effectNames = Object.keys(subtle3DEffects);
-    let randomEffect;
-    
-    do {
-      randomEffect = effectNames[Math.floor(Math.random() * effectNames.length)];
-    } while (randomEffect === lastEffect && effectNames.length > 1);
-    
-    lastEffect = randomEffect;
-    return subtle3DEffects[randomEffect];
+  function getRandomEffect() {
+    let effect;
+    do { effect = subtle3DEffects[Math.floor(Math.random() * subtle3DEffects.length)]; } 
+    while (effect === lastEffect && subtle3DEffects.length > 1);
+    lastEffect = effect;
+    return effect;
   }
 
-  // 🔹 Transition 3D améliorée
+  // 🔹 Transition vers une slide
   function goToSlide(newIndex) {
     if (isAnimating) return;
-    
     isAnimating = true;
     const oldIndex = currentIndex;
     currentIndex = newIndex;
+    const effect = getRandomEffect();
 
-    const effect = getRandom3DEffect();
-
-    // Appliquer les effets 3D
     slides.forEach((slide, index) => {
-      const img = slide.querySelector('img');
-      
-      // Transition fluide
-      img.style.transition = `all ${effect.duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
-      
+      const img = slide.querySelector("img");
+      img.style.position = "absolute"; // évite le scroll vertical
+      img.style.top = "0";
+      img.style.left = "0";
+      img.style.width = "100%";
+      img.style.height = "100%";
+      img.style.objectFit = "contain";
+      img.style.transition = "transform 1s ease, opacity 1s ease, filter 1s ease";
+      img.style.zIndex = index === currentIndex ? 10 : 1;
+
       if (index === currentIndex) {
-        // Image active - entrée
-        Object.assign(img.style, effect.in);
-        img.style.zIndex = '10';
-      } else if (index === oldIndex) {
-        // Image précédente - sortie
-        Object.assign(img.style, effect.out);
-        img.style.zIndex = '5';
+        img.style.opacity = "1";
+        img.style.transform = `
+          scale(${effect.scale})
+          rotateY(${effect.rotateY}deg)
+          translateZ(${effect.translateZ}px)
+          translateY(${effect.translateY}px)
+        `;
+        img.style.filter = "brightness(1) drop-shadow(0 15px 25px rgba(0,0,0,0.3))";
       } else {
-        // Autres images - état caché
-        img.style.transform = 'scale(0.8) translateZ(-100px)';
-        img.style.opacity = '0';
-        img.style.zIndex = '1';
+        img.style.opacity = "0";
+        img.style.transform = "scale(0.85) translateZ(-50px) translateY(0)";
+        img.style.filter = "brightness(0.7)";
       }
     });
 
-    // Animation du track
-    track.style.transition = `transform ${effect.duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    // track reste fixe horizontalement
+    track.style.transition = "transform 1s ease";
+    track.style.transform = `translateX(0)`;
 
-    // Mettre à jour les dotmarks
-    dots.forEach((dot, index) => {
-      dot.classList.remove("active");
-      if (index === currentIndex) {
-        dot.classList.add("active");
-      }
-    });
+    // Dotmarks
+    dots.forEach((dot, i) => dot.classList.toggle("active", i === currentIndex));
 
-    // Réinitialiser l'animation
-    setTimeout(() => {
-      isAnimating = false;
-    }, effect.duration);
+    setTimeout(() => { isAnimating = false; }, 1000);
   }
 
-  // 🔹 Timing aléatoire amélioré
+  // 🔹 Slide automatique
   function startAutoSlide() {
     stopAutoSlide();
-    
     if (!isSectionVisible) return;
-    
-    function scheduleNextSlide() {
+
+    function scheduleNext() {
       if (!isSectionVisible) return;
-      
-      // Timing aléatoire entre 3 et 5 secondes
-      const nextTime = 3000 + Math.random() * 2000;
-      
+      const delay = 3000 + Math.random() * 2000; // 3-5s
       autoSlideInterval = setTimeout(() => {
         if (!isAnimating && isSectionVisible) {
-          const nextIndex = (currentIndex + 1) % slides.length;
-          goToSlide(nextIndex);
-          scheduleNextSlide();
+          goToSlide((currentIndex + 1) % slides.length);
+          scheduleNext();
         }
-      }, nextTime);
+      }, delay);
     }
-    
-    scheduleNextSlide();
+    scheduleNext();
   }
 
   function stopAutoSlide() {
@@ -3078,100 +3000,40 @@ function setupCertificationsSliderAlt() {
   }
 
   // 🔹 Détection de visibilité
-  function checkSectionVisibility() {
+  function checkVisibility() {
     if (!section) return;
-    
     const rect = section.getBoundingClientRect();
     const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    
-    const isVisible = (
-      rect.top <= windowHeight * 0.7 &&
-      rect.bottom >= windowHeight * 0.3
-    );
-    
-    if (isVisible && !isSectionVisible) {
-      isSectionVisible = true;
-      console.log("👁️ Section certifications visible");
-      startAutoSlide();
-      
-    } else if (!isVisible && isSectionVisible) {
-      isSectionVisible = false;
-      console.log("👻 Section certifications invisible");
-      stopAutoSlide();
-    }
+    const visible = rect.top <= windowHeight * 0.7 && rect.bottom >= windowHeight * 0.3;
+
+    if (visible && !isSectionVisible) { isSectionVisible = true; startAutoSlide(); }
+    else if (!visible && isSectionVisible) { isSectionVisible = false; stopAutoSlide(); }
   }
 
-  // 🔹 Initialisation corrigée pour garantir la visibilité
-  function initializeStyles() {
-    // S'assurer que TOUTES les images sont positionnées correctement
-    slides.forEach((slide, index) => {
-      const img = slide.querySelector('img');
-      
-      // Styles de base essentiels
-      Object.assign(img.style, {
-        position: 'relative', // Important pour la superposition
-        width: '100%',
-        height: '100%',
-        objectFit: 'contain',
-        display: 'block',
-        opacity: index === 0 ? '1' : '0', // Seule la première image visible
-        transform: index === 0 ? 'scale(1) rotateY(0deg)' : 'scale(0.8) translateZ(-100px)',
-        transition: 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-        willChange: 'transform, opacity'
-      });
-    });
-
-    // Position initiale du track
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    track.style.transition = 'transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-
-    // Forcer un reflow pour s'assurer que les styles sont appliqués
-    track.offsetHeight;
-  }
-
-  // 🔹 Événements
-  let scrollTimeout;
-  function throttledCheckVisibility() {
-    if (!scrollTimeout) {
-      scrollTimeout = setTimeout(() => {
-        checkSectionVisibility();
-        scrollTimeout = null;
-      }, 100);
-    }
-  }
-
-  window.addEventListener('scroll', throttledCheckVisibility);
-  window.addEventListener('resize', throttledCheckVisibility);
+  window.addEventListener("scroll", checkVisibility);
+  window.addEventListener("resize", checkVisibility);
 
   // 🔹 Initialisation
-  setTimeout(() => {
-    initializeStyles();
-    checkSectionVisibility();
-    
-    // S'assurer que l'image 1 est visible
-    const firstImg = slides[0].querySelector('img');
-    firstImg.style.opacity = '1';
-    firstImg.style.transform = 'scale(1) rotateY(0deg)';
-    
-  }, 150);
+  slides.forEach((slide, index) => {
+    const img = slide.querySelector("img");
+    img.style.position = "absolute";
+    img.style.top = "0";
+    img.style.left = "0";
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "contain";
+    img.style.opacity = index === 0 ? "1" : "0";
+    img.style.transform = index === 0 ? "scale(1) rotateY(0deg)" : "scale(0.85) translateZ(-50px)";
+    img.style.transition = "transform 1s ease, opacity 1s ease";
+    img.style.zIndex = index === 0 ? 10 : 1;
+  });
+  track.style.transform = "translateX(0)";
 
-  console.log("🎯 Slider 3D sobre initialisé");
+  setTimeout(checkVisibility, 100);
+  console.log("🎯 Slider 3D corrigé initialisé !");
 }
 
-// === INITIALISATION ===
-document.addEventListener("DOMContentLoaded", function() {
-  console.log("🚀 Chargement du slider 3D...");
-  setupCertificationsSliderAlt();
-});
-
-// Redémarrage si nécessaire
-setTimeout(() => {
-  const firstImg = document.querySelector('.slide-alt img');
-  if (firstImg && firstImg.style.opacity !== '1') {
-    console.log("🔄 Correction de la visibilité...");
-    setupCertificationsSliderAlt();
-  }
-}, 2000);
+document.addEventListener("DOMContentLoaded", setupCertificationsSliderAlt);
 
 
 
