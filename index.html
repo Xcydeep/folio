@@ -2132,6 +2132,17 @@
 /* COMPTEUR DE SLIDES */
 .slide-counter { display: none; }
 
+
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 
@@ -2886,9 +2897,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
+// === SLIDER SIMPLE SANS 3D - CORRIGÉ ===
 function setupCertificationsSliderAlt() {
-  console.log("🌙 Initialisation du slider 3D corrigé...");
+  console.log("🎯 Initialisation du slider simple...");
 
   const track = document.getElementById("certSliderTrackAlt");
   const slides = document.querySelectorAll(".slide-alt");
@@ -2899,7 +2910,11 @@ function setupCertificationsSliderAlt() {
   let autoSlideInterval;
   let isAnimating = false;
   let isSectionVisible = false;
-  let lastEffect = '';
+  
+  // Variables pour le touch
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let isDragging = false;
 
   // 🔹 Création des dotmarks
   slides.forEach((_, i) => {
@@ -2907,134 +2922,191 @@ function setupCertificationsSliderAlt() {
     dot.classList.add("slider-dotmark-alt");
     if (i === 0) dot.classList.add("active");
     dot.setAttribute("data-index", i);
-    dot.addEventListener("click", () => goToSlide(i));
     dotsContainer.appendChild(dot);
   });
+
   const dots = document.querySelectorAll(".slider-dotmark-alt");
 
-  // 🔹 Effets 3D aléatoires
-  const subtle3DEffects = [
-    {scale: 1, rotateY: 0, translateZ: 0, translateY: 0},
-    {scale: 1.02, rotateY: 5, translateZ: 20, translateY: -5},
-    {scale: 0.98, rotateY: -5, translateZ: 15, translateY: 3},
-    {scale: 1, rotateY: 8, translateZ: 10, translateY: -2},
-    {scale: 1.01, rotateY: -6, translateZ: 18, translateY: 4}
-  ];
-
-  function getRandomEffect() {
-    let effect;
-    do { effect = subtle3DEffects[Math.floor(Math.random() * subtle3DEffects.length)]; } 
-    while (effect === lastEffect && subtle3DEffects.length > 1);
-    lastEffect = effect;
-    return effect;
-  }
-
-  // 🔹 Transition vers une slide
-  function goToSlide(newIndex) {
-    if (isAnimating) return;
-    isAnimating = true;
-    const oldIndex = currentIndex;
-    currentIndex = newIndex;
-    const effect = getRandomEffect();
-
-    slides.forEach((slide, index) => {
-      const img = slide.querySelector("img");
-      img.style.position = "absolute"; // évite le scroll vertical
-      img.style.top = "0";
-      img.style.left = "0";
-      img.style.width = "100%";
-      img.style.height = "100%";
-      img.style.objectFit = "contain";
-      img.style.transition = "transform 1s ease, opacity 1s ease, filter 1s ease";
-      img.style.zIndex = index === currentIndex ? 10 : 1;
-
-      if (index === currentIndex) {
-        img.style.opacity = "1";
-        img.style.transform = `
-          scale(${effect.scale})
-          rotateY(${effect.rotateY}deg)
-          translateZ(${effect.translateZ}px)
-          translateY(${effect.translateY}px)
-        `;
-        img.style.filter = "brightness(1) drop-shadow(0 15px 25px rgba(0,0,0,0.3))";
-      } else {
-        img.style.opacity = "0";
-        img.style.transform = "scale(0.85) translateZ(-50px) translateY(0)";
-        img.style.filter = "brightness(0.7)";
+  // 🔹 Navigation par dots
+  dots.forEach(dot => {
+    dot.addEventListener("click", (e) => {
+      const index = parseInt(e.target.getAttribute("data-index"));
+      if (!isAnimating && index !== currentIndex) {
+        goToSlide(index);
       }
     });
+  });
 
-    // track reste fixe horizontalement
-    track.style.transition = "transform 1s ease";
-    track.style.transform = `translateX(0)`;
-
-    // Dotmarks
-    dots.forEach((dot, i) => dot.classList.toggle("active", i === currentIndex));
-
-    setTimeout(() => { isAnimating = false; }, 1000);
+  // 🔹 GESTION DU TOUCH - EMPÊCHE LE SCROLL
+  function handleTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+    isDragging = true;
+    stopAutoSlide();
+    
+    // Empêche le scroll pendant l'interaction
+    track.style.touchAction = "pan-x";
+    document.body.style.overflow = "hidden";
   }
 
-  // 🔹 Slide automatique
+  function handleTouchMove(e) {
+    if (!isDragging) return;
+    
+    touchEndX = e.touches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    
+    // Empêche le scroll vertical si on swipe horizontalement
+    if (Math.abs(diff) > 10) {
+      e.preventDefault();
+    }
+  }
+
+  function handleTouchEnd(e) {
+    if (!isDragging) return;
+    
+    touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    const minSwipeDistance = 50;
+    
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0 && !isAnimating) {
+        // Swipe gauche -> suivant
+        goToSlide(currentIndex + 1);
+      } else if (diff < 0 && !isAnimating) {
+        // Swipe droite -> précédent
+        goToSlide(currentIndex - 1);
+      }
+    }
+    
+    // Rétablir le scroll
+    track.style.touchAction = "";
+    document.body.style.overflow = "";
+    isDragging = false;
+    startAutoSlide();
+  }
+
+  // Ajouter les écouteurs
+  track.addEventListener("touchstart", handleTouchStart, { passive: true });
+  track.addEventListener("touchmove", handleTouchMove, { passive: false });
+  track.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+  // 🔹 Transition SIMPLE sans effets 3D
+  function goToSlide(newIndex) {
+    if (isAnimating) return;
+    
+    isAnimating = true;
+    
+    // Gestion des limites
+    if (newIndex < 0) newIndex = slides.length - 1;
+    if (newIndex >= slides.length) newIndex = 0;
+    
+    const oldIndex = currentIndex;
+    currentIndex = newIndex;
+
+    console.log(`🔄 Passage de ${oldIndex + 1} à ${currentIndex + 1}`);
+
+    // Animation SIMPLE - juste la translation
+    track.style.transition = "transform 0.5s ease-in-out";
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Mettre à jour les dotmarks
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentIndex);
+    });
+
+    // Réinitialiser l'animation
+    setTimeout(() => {
+      isAnimating = false;
+    }, 500);
+  }
+
+  // 🔹 Autoplay simple
   function startAutoSlide() {
     stopAutoSlide();
+    
     if (!isSectionVisible) return;
-
-    function scheduleNext() {
-      if (!isSectionVisible) return;
-      const delay = 3000 + Math.random() * 2000; // 3-5s
-      autoSlideInterval = setTimeout(() => {
-        if (!isAnimating && isSectionVisible) {
-          goToSlide((currentIndex + 1) % slides.length);
-          scheduleNext();
-        }
-      }, delay);
-    }
-    scheduleNext();
+    
+    autoSlideInterval = setInterval(() => {
+      if (!isAnimating && isSectionVisible && !isDragging) {
+        goToSlide(currentIndex + 1);
+      }
+    }, 4000);
   }
 
   function stopAutoSlide() {
     if (autoSlideInterval) {
-      clearTimeout(autoSlideInterval);
+      clearInterval(autoSlideInterval);
       autoSlideInterval = null;
     }
   }
 
   // 🔹 Détection de visibilité
-  function checkVisibility() {
+  function checkSectionVisibility() {
     if (!section) return;
+    
     const rect = section.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    const visible = rect.top <= windowHeight * 0.7 && rect.bottom >= windowHeight * 0.3;
-
-    if (visible && !isSectionVisible) { isSectionVisible = true; startAutoSlide(); }
-    else if (!visible && isSectionVisible) { isSectionVisible = false; stopAutoSlide(); }
+    const windowHeight = window.innerHeight;
+    
+    const isVisible = (
+      rect.top <= windowHeight * 0.8 &&
+      rect.bottom >= windowHeight * 0.2
+    );
+    
+    if (isVisible && !isSectionVisible) {
+      isSectionVisible = true;
+      console.log("👁️ Section visible - autoplay démarré");
+      startAutoSlide();
+    } else if (!isVisible && isSectionVisible) {
+      isSectionVisible = false;
+      console.log("👻 Section invisible - autoplay arrêté");
+      stopAutoSlide();
+    }
   }
 
-  window.addEventListener("scroll", checkVisibility);
-  window.addEventListener("resize", checkVisibility);
+  // 🔹 Initialisation SIMPLIFIÉE
+  function initializeStyles() {
+    // Réinitialiser la position
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    track.style.transition = 'none';
+    
+    // Forcer un reflow
+    track.offsetHeight;
+    
+    // Réactiver les transitions
+    track.style.transition = "transform 0.5s ease-in-out";
+    
+    // Vérifier la visibilité
+    checkSectionVisibility();
+    
+    console.log("✅ Slider initialisé - slide:", currentIndex + 1);
+  }
+
+  // 🔹 Événements
+  let scrollTimeout;
+  function throttledCheckVisibility() {
+    if (!scrollTimeout) {
+      scrollTimeout = setTimeout(() => {
+        checkSectionVisibility();
+        scrollTimeout = null;
+      }, 100);
+    }
+  }
+
+  window.addEventListener('scroll', throttledCheckVisibility);
+  window.addEventListener('resize', throttledCheckVisibility);
 
   // 🔹 Initialisation
-  slides.forEach((slide, index) => {
-    const img = slide.querySelector("img");
-    img.style.position = "absolute";
-    img.style.top = "0";
-    img.style.left = "0";
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "contain";
-    img.style.opacity = index === 0 ? "1" : "0";
-    img.style.transform = index === 0 ? "scale(1) rotateY(0deg)" : "scale(0.85) translateZ(-50px)";
-    img.style.transition = "transform 1s ease, opacity 1s ease";
-    img.style.zIndex = index === 0 ? 10 : 1;
-  });
-  track.style.transform = "translateX(0)";
-
-  setTimeout(checkVisibility, 100);
-  console.log("🎯 Slider 3D corrigé initialisé !");
+  setTimeout(() => {
+    initializeStyles();
+  }, 100);
 }
 
-document.addEventListener("DOMContentLoaded", setupCertificationsSliderAlt);
-
+// === INITIALISATION ===
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("🚀 Chargement du slider simple...");
+  setTimeout(() => {
+    setupCertificationsSliderAlt();
+  }, 500);
+});
 
 
     </script>
