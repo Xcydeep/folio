@@ -1923,226 +1923,6 @@
   }
 }
 
-
-
-
-//* === NOUVELLE VERSION AMÉLIORÉE === */
-.certifications-slider-alt {
-  position: relative;
-  max-width: 900px;
-  margin: 40px auto 0;
-  padding: 0 20px;
-}
-
-
-
-.slider-track-alt {
-  display: flex;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
-}
-
-.slide-alt {
-  min-width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-
-.cert-card-alt {
-  width: 100%;
-  max-width: 600px;
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(15, 15, 27, 0.6);
-  border-radius: 16px;
-  padding: 20px;
-  border: 1px solid rgba(138, 99, 210, 0.2);
-  transition: all 0.3s ease;
-}
-
-.cert-card-alt:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--hover-shadow);
-}
-
-.cert-card-alt img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 12px;
-  transition: transform 0.3s ease;
-}
-
-.cert-card-alt:hover img {
-  transform: scale(1.02);
-}
-
-
-/* === DOTMARKS AMÉLIORÉS === */
-.slider-dotmarks-alt {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  margin-top: 30px;
-  padding: 15px;
- 
- 
-}
-
-.slider-dotmark-alt {
-  width: 14px;
-  height: 14px;
-  background: linear-gradient(135deg, var(--gray-color), #6b7280);
-  border-radius: 50%;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid transparent;
-}
-
-.slider-dotmark-alt::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 0.6s ease;
-}
-
-.slider-dotmark-alt:hover {
-  transform: scale(1.4);
-  background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
-  box-shadow: 0 0 15px var(--accent-color);
-}
-
-.slider-dotmark-alt:hover::before {
-  left: 100%;
-}
-
-.slider-dotmark-alt.active {
-  width: 18px;
-  height: 18px;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  transform: scale(1.6);
-  box-shadow: 0 0 20px var(--primary-color), 
-              0 0 30px rgba(138, 99, 210, 0.4);
-  border-color: var(--light-accent);
-  animation: dotmark-pulse 2s infinite;
-}
-
-@keyframes dotmark-pulse {
-  0%, 100% {
-    box-shadow: 0 0 20px var(--primary-color), 
-                0 0 30px rgba(138, 99, 210, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 25px var(--primary-color), 
-                0 0 40px rgba(138, 99, 210, 0.6);
-  }
-}
-
-
-
-.current-slide {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.counter-separator {
-  color: var(--accent-color);
-}
-
-.total-slides {
-  color: var(--light-color);
-}
-
-/* === ADAPTATION MOBILE AMÉLIORÉE === */
-@media (max-width: 768px) {
-  .certifications-slider-alt {
-    margin: 30px auto 0;
-    padding: 0 15px;
-  }
-  
- 
-  .cert-card-alt {
-    height: 300px;
-    padding: 15px;
-  }
-  
-  
-  
-  .slider-dotmarks-alt {
-    gap: 12px;
-    margin-top: 25px;
-    padding: 12px;
-  }
-  
-  .slider-dotmark-alt {
-    width: 12px;
-    height: 12px;
-  }
-  
-  .slider-dotmark-alt.active {
-    width: 16px;
-    height: 16px;
-  }
-  
-  
-}
-
-@media (max-width: 480px) {
-  .cert-card-alt {
-    height: 250px;
-    padding: 10px;
-  }
-  
-  .slider-nav-btn {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .slider-dotmarks-alt {
-    gap: 10px;
-    margin-top: 20px;
-    padding: 10px;
-  }
-  
-  .slider-dotmark-alt {
-    width: 10px;
-    height: 10px;
-  }
-  
-  .slider-dotmark-alt.active {
-    width: 14px;
-    height: 14px;
-  }
-}
-
-/* BOUTONS DE NAVIGATION */
-.slider-nav-btn { display: none; }
-
-/* COMPTEUR DE SLIDES */
-.slide-counter { display: none; }
-
-
-
-
-
-
-
-
-
-
-
-
     </style>
 </head>
 
@@ -2427,68 +2207,48 @@
 
     <!-- Certifications (section séparée) -->
    <!-- Certifications Section -->
-<!-- Nouvelle section dotmarks améliorée -->
-<section class="section" id="certifications-alt">
+<section class="section" id="certifications">
     <div class="section-divider"></div>
     <div class="container">
-      <div class="section-title" style="margin-bottom:32px;">
-        <h2 style="font-family: 'Orbitron',sans-serif;letter-spacing:2.5px;font-size:2.3rem;margin-bottom:20px;">
-          Certifications
-        </h2>
-        <p style="color:var(--gray-color);font-size:1rem;max-width:600px;margin:0 auto 3px auto;font-weight:300;">
-          Mes preuves de réussite dans divers programmes.
-        </p>
-      </div>
-  
-      <div class="certifications-slider-alt">
-        <div class="slider-container-alt">
-          <!-- Boutons de navigation -->
-          <button class="slider-nav-btn prev-btn" aria-label="Slide précédent">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          
-          <div class="slider-track-alt" id="certSliderTrackAlt">
-            <div class="slide-alt">
-              <div class="cert-card-alt">
-                <img src="e7494613-2183-4194-a156-4091769767bc.jpg" alt="Certification 1">
-              </div>
-            </div>
-            <div class="slide-alt">
-              <div class="cert-card-alt">
-                <img src="fc6bda7d-08b1-4e67-8410-2c4ddb6e15df.jpg" alt="Certification 2">
-              </div>
-            </div>
-            <div class="slide-alt">
-              <div class="cert-card-alt">
-                <img src="73c1cdf1-e726-4af5-b6f6-842ffd7c0e5d.jpg" alt="Certification 3">
-              </div>
-            </div>
-            <div class="slide-alt">
-              <div class="cert-card-alt">
-                <img src="8cfe4772-acdd-40ae-8f38-c06411c10e69.jpg" alt="Certification 4">
-              </div>
-            </div>
-            <div class="slide-alt">
-              <div class="cert-card-alt">
-                <img src="2768cdeb-f44f-4fed-a839-c700290e299e.jpg" alt="Certification 5">
-              </div>
-            </div>
-          </div>
-  
+        <div class="section-title" style="margin-bottom:32px;">
+            <h2 style="font-family: 'Orbitron',sans-serif;letter-spacing:2.5px;font-size:2.3rem;margin-bottom:20px;">Certifications</h2>
+            <p style="color:var(--gray-color);font-size:1rem;max-width:600px;margin:0 auto 3px auto;font-weight:300;">Mes preuves de réussite dans divers programmes.</p>
         </div>
-  
-        <!-- Les nouveaux dotmarks améliorés -->
-        <div class="slider-dotmarks-alt" id="certDotmarksAlt"></div>
         
-        <!-- Compteur de slides -->
-        <div class="slide-counter">
-          <span class="current-slide">1</span>
-          <span class="counter-separator">/</span>
-          <span class="total-slides">5</span>
+        <div class="certifications-slider">
+            <div class="slider-container">
+                <div class="slider-track" id="certSliderTrack">
+                    <div class="slide">
+                        <div class="single-cert-card">
+                            <img src="fc6bda7d-08b1-4e67-8410-2c4ddb6e15df.jpg" alt="Certification 1">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="single-cert-card">
+                            <img src="73c1cdf1-e726-4af5-b6f6-842ffd7c0e5d.jpg" alt="Certification 2">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="single-cert-card">
+                            <img src="8cfe4772-acdd-40ae-8f38-c06411c10e69.jpg" alt="Certification 3">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="single-cert-card">
+                            <img src="2768cdeb-f44f-4fed-a839-c700290e299e.jpg" alt="Certification 4">
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots" id="certDots">
+                    <div class="slider-dot active" data-slide="0"></div>
+                    <div class="slider-dot" data-slide="1"></div>
+                    <div class="slider-dot" data-slide="2"></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
+
     <!-- Contact Section -->
    <section class="section" id="contact">
     <div class="section-divider"></div>
@@ -2895,218 +2655,374 @@ document.addEventListener("DOMContentLoaded", () => {
         goldLinesContainer.appendChild(line);
     }
 });
+// Three.js Certifications Carousel
+/* Three.js removed per user's request; using CSS/JS slider version */
+function setupCertificationsThree() {
+    const mount = document.getElementById('cert3d');
+    return; // no-op
+    const label = document.getElementById('certLabel');
 
+    const width = mount.clientWidth;
+    const height = mount.clientHeight;
 
-// === SLIDER SIMPLE SANS 3D - CORRIGÉ ===
-function setupCertificationsSliderAlt() {
-  console.log("🎯 Initialisation du slider simple...");
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000);
+    scene.fog = new THREE.FogExp2(0x000000, 0.008);
 
-  const track = document.getElementById("certSliderTrackAlt");
-  const slides = document.querySelectorAll(".slide-alt");
-  const dotsContainer = document.getElementById("certDotmarksAlt");
-  const section = document.getElementById("certifications-alt");
+    const camera = new THREE.PerspectiveCamera(55, width/height, 0.1, 2000);
+    camera.position.set(0, 0.5, 7.5);
 
-  let currentIndex = 0;
-  let autoSlideInterval;
-  let isAnimating = false;
-  let isSectionVisible = false;
-  
-  // Variables pour le touch
-  let touchStartX = 0;
-  let touchEndX = 0;
-  let isDragging = false;
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(width, height);
+    // Color space compatibility (r150+ vs legacy)
+    if ('outputColorSpace' in renderer) {
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+    } else if ('outputEncoding' in renderer) {
+        renderer.outputEncoding = THREE.sRGBEncoding;
+    }
+    mount.appendChild(renderer.domElement);
+    camera.lookAt(0,0,0);
 
-  // 🔹 Création des dotmarks
-  slides.forEach((_, i) => {
-    const dot = document.createElement("div");
-    dot.classList.add("slider-dotmark-alt");
-    if (i === 0) dot.classList.add("active");
-    dot.setAttribute("data-index", i);
-    dotsContainer.appendChild(dot);
-  });
+    // Lights (violet + cyan)
+    const dirViolet = new THREE.DirectionalLight(0x8b5cf6, 1.2);
+    dirViolet.position.set(-3, 2, 2);
+    scene.add(dirViolet);
+    const dirCyan = new THREE.DirectionalLight(0x00ffff, 1.1);
+    dirCyan.position.set(3, 1, -2);
+    scene.add(dirCyan);
+    const ambient = new THREE.AmbientLight(0x222244, 0.6);
+    scene.add(ambient);
 
-  const dots = document.querySelectorAll(".slider-dotmark-alt");
+    // Particles background
+    const particles = new THREE.BufferGeometry();
+    const count = 600;
+    const pos = new Float32Array(count * 3);
+    for (let i=0;i<count;i++){ pos[3*i] = (Math.random()-0.5)*20; pos[3*i+1]=(Math.random()-0.5)*12; pos[3*i+2]=(Math.random()-0.5)*20; }
+    particles.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const pMat = new THREE.PointsMaterial({ color: 0x7fffff, size: 0.02, transparent:true, opacity:0.4, depthWrite:false });
+    const points = new THREE.Points(particles, pMat);
+    scene.add(points);
 
-  // 🔹 Navigation par dots
-  dots.forEach(dot => {
-    dot.addEventListener("click", (e) => {
-      const index = parseInt(e.target.getAttribute("data-index"));
-      if (!isAnimating && index !== currentIndex) {
-        goToSlide(index);
-      }
+    // Materials (holographic)
+    const cardMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.25, metalness: 0.7, envMapIntensity: 1.0 });
+    const borderMat = new THREE.MeshBasicMaterial({ color: 0x00ffff, transparent:true, opacity:0.35, side: THREE.DoubleSide });
+
+    // Load textures from images
+    const loader = new THREE.TextureLoader();
+    loader.setCrossOrigin('anonymous');
+    const sources = [
+        { src: 'fc6bda7d-08b1-4e67-8410-2c4ddb6e15df.jpg', label: 'Certification 1' },
+        { src: '73c1cdf1-e726-4af5-b6f6-842ffd7c0e5d.jpg', label: 'Certification 2' },
+        { src: '8cfe4772-acdd-40ae-8f38-c06411c10e69.jpg', label: 'Certification 3' }
+    ];
+    // Preload textures with error handling and placeholders
+    function preloadTextures() {
+        return Promise.all(sources.map((s) => new Promise((resolve) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+                const tex = new THREE.Texture(img);
+                tex.needsUpdate = true;
+                if ('colorSpace' in tex) tex.colorSpace = THREE.SRGBColorSpace; else tex.encoding = THREE.sRGBEncoding;
+                tex.anisotropy = Math.min(16, renderer.capabilities.getMaxAnisotropy?.() || 8);
+                tex.generateMipmaps = true; tex.minFilter = THREE.LinearMipmapLinearFilter; tex.magFilter = THREE.LinearFilter;
+                resolve({ texture: tex, label: s.label });
+            };
+            img.onerror = () => {
+                // Canvas placeholder with filename hint
+                const canvas = document.createElement('canvas');
+                canvas.width = 800; canvas.height = 500;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#0b0b14'; ctx.fillRect(0,0,800,500);
+                ctx.fillStyle = '#00ffff'; ctx.font = 'bold 28px Orbitron, Arial'; ctx.textAlign = 'center';
+                ctx.fillText('Image non trouvée', 400, 230);
+                const tex = new THREE.CanvasTexture(canvas);
+                if ('colorSpace' in tex) tex.colorSpace = THREE.SRGBColorSpace; else tex.encoding = THREE.sRGBEncoding;
+                resolve({ texture: tex, label: s.label });
+            };
+            img.src = s.src;
+        })));
+    }
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const cards = [];
+    const radius = 4.8;
+    const aspect = 16/10; // assure qu'on voit bien haut/bas
+    const h = 2.4; // taille ajustée pour garantir visibilité
+    const w = h * aspect;
+
+    preloadTextures().then((items) => {
+        items.forEach((item, i) => {
+            const geo = new THREE.PlaneGeometry(w, h, 1, 1);
+            const mesh = new THREE.Mesh(geo, cardMat.clone());
+            const picture = new THREE.Mesh(new THREE.PlaneGeometry(w*0.98, h*0.98), new THREE.MeshBasicMaterial({ map: item.texture, side: THREE.DoubleSide }));
+            picture.position.z = 0.01;
+            mesh.add(picture);
+
+            const border = new THREE.Mesh(new THREE.PlaneGeometry(w*1.02, h*1.02), borderMat.clone());
+            border.position.z = -0.01;
+            mesh.add(border);
+
+            const angle = (i / items.length) * Math.PI * 2;
+            mesh.position.set(Math.cos(angle)*radius, 0, Math.sin(angle)*radius);
+            mesh.lookAt(0, 0, 0);
+            mesh.userData = { label: sources[i].label };
+            cards.push(mesh);
+            group.add(mesh);
+        });
     });
-  });
 
-  // 🔹 GESTION DU TOUCH - EMPÊCHE LE SCROLL
-  function handleTouchStart(e) {
-    touchStartX = e.touches[0].clientX;
-    isDragging = true;
-    stopAutoSlide();
-    
-    // Empêche le scroll pendant l'interaction
-    track.style.touchAction = "pan-x";
-    document.body.style.overflow = "hidden";
-  }
+    // Post-processing (Bloom + DOF)
+    const composer = new THREE.EffectComposer(renderer);
+    composer.addPass(new THREE.RenderPass(scene, camera));
+    const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(width, height), 0.6, 0.8, 0.1);
+    composer.addPass(bloom);
+    const bokeh = new THREE.BokehPass(scene, camera, { focus: 6.0, aperture: 0.0015, maxblur: 0.015, width, height });
+    composer.addPass(bokeh);
 
-  function handleTouchMove(e) {
-    if (!isDragging) return;
-    
-    touchEndX = e.touches[0].clientX;
-    const diff = touchStartX - touchEndX;
-    
-    // Empêche le scroll vertical si on swipe horizontalement
-    if (Math.abs(diff) > 10) {
-      e.preventDefault();
+    // Interaction raycaster
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let hovered = null;
+    const onPointerMove = (e) => {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    };
+    renderer.domElement.addEventListener('pointermove', onPointerMove);
+
+    // Autoplay rotation + scroll horizontal (wheel)
+    let auto = true;
+    renderer.domElement.addEventListener('mouseenter', () => { auto = false; });
+    renderer.domElement.addEventListener('mouseleave', () => { auto = true; });
+    renderer.domElement.addEventListener('wheel', (e) => {
+        group.rotation.y += (e.deltaY > 0 ? 1 : -1) * 0.15;
+    }, { passive: true });
+
+    // Subtle hover sound (optional)
+    let audioCtx; let hoverOsc;
+    function playHover(){
+        try {
+            audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+            hoverOsc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            hoverOsc.type = 'sine';
+            hoverOsc.frequency.value = 680;
+            gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.02, audioCtx.currentTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.25);
+            hoverOsc.connect(gain).connect(audioCtx.destination);
+            hoverOsc.start();
+            setTimeout(() => hoverOsc.stop(), 300);
+        } catch(_){}
     }
-  }
 
-  function handleTouchEnd(e) {
-    if (!isDragging) return;
-    
-    touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX - touchEndX;
-    const minSwipeDistance = 50;
-    
-    if (Math.abs(diff) > minSwipeDistance) {
-      if (diff > 0 && !isAnimating) {
-        // Swipe gauche -> suivant
-        goToSlide(currentIndex + 1);
-      } else if (diff < 0 && !isAnimating) {
-        // Swipe droite -> précédent
-        goToSlide(currentIndex - 1);
-      }
+    // Animate
+    function animate(){
+        requestAnimationFrame(animate);
+        if (auto) group.rotation.y += 0.0035;
+
+        // glow/zoom on hover
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(cards, true);
+        const hit = intersects.length ? intersects[0].object.parent : null;
+        if (hit !== hovered){
+            if (hovered){ hovered.scale.set(1,1,1); hovered.children[1].material.opacity = 0.35; }
+            hovered = hit;
+            if (hovered){ hovered.scale.set(1.06,1.06,1.06); hovered.children[1].material.opacity = 0.85; playHover(); label.style.display='block'; label.textContent = hovered.userData.label; }
+            else { label.style.display='none'; }
+        }
+
+        composer.render();
     }
-    
-    // Rétablir le scroll
-    track.style.touchAction = "";
-    document.body.style.overflow = "";
-    isDragging = false;
-    startAutoSlide();
-  }
+    animate();
 
-  // Ajouter les écouteurs
-  track.addEventListener("touchstart", handleTouchStart, { passive: true });
-  track.addEventListener("touchmove", handleTouchMove, { passive: false });
-  track.addEventListener("touchend", handleTouchEnd, { passive: true });
-
-  // 🔹 Transition SIMPLE sans effets 3D
-  function goToSlide(newIndex) {
-    if (isAnimating) return;
-    
-    isAnimating = true;
-    
-    // Gestion des limites
-    if (newIndex < 0) newIndex = slides.length - 1;
-    if (newIndex >= slides.length) newIndex = 0;
-    
-    const oldIndex = currentIndex;
-    currentIndex = newIndex;
-
-    console.log(`🔄 Passage de ${oldIndex + 1} à ${currentIndex + 1}`);
-
-    // Animation SIMPLE - juste la translation
-    track.style.transition = "transform 0.5s ease-in-out";
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-    // Mettre à jour les dotmarks
-    dots.forEach((dot, index) => {
-      dot.classList.toggle("active", index === currentIndex);
+    // Resize
+    window.addEventListener('resize', () => {
+        const w = mount.clientWidth, h = mount.clientHeight;
+        camera.aspect = w/h; camera.updateProjectionMatrix();
+        renderer.setSize(w,h); composer.setSize(w,h);
     });
-
-    // Réinitialiser l'animation
-    setTimeout(() => {
-      isAnimating = false;
-    }, 500);
-  }
-
-  // 🔹 Autoplay simple
-  function startAutoSlide() {
-    stopAutoSlide();
-    
-    if (!isSectionVisible) return;
-    
-    autoSlideInterval = setInterval(() => {
-      if (!isAnimating && isSectionVisible && !isDragging) {
-        goToSlide(currentIndex + 1);
-      }
-    }, 4000);
-  }
-
-  function stopAutoSlide() {
-    if (autoSlideInterval) {
-      clearInterval(autoSlideInterval);
-      autoSlideInterval = null;
-    }
-  }
-
-  // 🔹 Détection de visibilité
-  function checkSectionVisibility() {
-    if (!section) return;
-    
-    const rect = section.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    
-    const isVisible = (
-      rect.top <= windowHeight * 0.8 &&
-      rect.bottom >= windowHeight * 0.2
-    );
-    
-    if (isVisible && !isSectionVisible) {
-      isSectionVisible = true;
-      console.log("👁️ Section visible - autoplay démarré");
-      startAutoSlide();
-    } else if (!isVisible && isSectionVisible) {
-      isSectionVisible = false;
-      console.log("👻 Section invisible - autoplay arrêté");
-      stopAutoSlide();
-    }
-  }
-
-  // 🔹 Initialisation SIMPLIFIÉE
-  function initializeStyles() {
-    // Réinitialiser la position
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    track.style.transition = 'none';
-    
-    // Forcer un reflow
-    track.offsetHeight;
-    
-    // Réactiver les transitions
-    track.style.transition = "transform 0.5s ease-in-out";
-    
-    // Vérifier la visibilité
-    checkSectionVisibility();
-    
-    console.log("✅ Slider initialisé - slide:", currentIndex + 1);
-  }
-
-  // 🔹 Événements
-  let scrollTimeout;
-  function throttledCheckVisibility() {
-    if (!scrollTimeout) {
-      scrollTimeout = setTimeout(() => {
-        checkSectionVisibility();
-        scrollTimeout = null;
-      }, 100);
-    }
-  }
-
-  window.addEventListener('scroll', throttledCheckVisibility);
-  window.addEventListener('resize', throttledCheckVisibility);
-
-  // 🔹 Initialisation
-  setTimeout(() => {
-    initializeStyles();
-  }, 100);
 }
 
-// === INITIALISATION ===
-document.addEventListener("DOMContentLoaded", function() {
-  console.log("🚀 Chargement du slider simple...");
-  setTimeout(() => {
-    setupCertificationsSliderAlt();
-  }, 500);
+// Parallax léger sur sections
+function setupParallaxSections() {
+    const sections = document.querySelectorAll('.section, .hero');
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        sections.forEach(sec => {
+            const depth = 0.05; // parallax doux
+            const translate = (sec.getBoundingClientRect().top + scrollY) * depth * -0.02;
+            sec.style.transform = `translateZ(0) translateY(${translate}px)`;
+        });
+    }, { passive: true });
+}
+
+// Tilt 3D au survol pour cartes
+function setupTiltOnCards() {
+    const tiltSelectors = ['.skill-category', '.project-card', '.timeline-content', '.education-item'];
+    const cards = document.querySelectorAll(tiltSelectors.join(','));
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const rotateY = ((x / rect.width) - 0.5) * 8;
+            const rotateX = -((y / rect.height) - 0.5) * 8;
+            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+}
+
+// Positionne les éléments du carrousel de certifications sur un cercle 3D
+// Slider 3D doux (rail) avec boutons et swipe
+function setupCertificationsSlider() {
+    const rail = document.getElementById('certsRail');
+    if (!rail) return;
+    const cards = Array.from(rail.querySelectorAll('.cert-card'));
+    let index = 0;
+    let autoplayTimer = null;
+
+    const apply = () => {
+        const w = rail.clientWidth;
+        // repositionner le rail pour centrer la carte active
+        const base = (w * 0.1); // marge visuelle
+        rail.style.transform = `translateX(calc(50% - ${(index + 0.5) * (cards[0].clientWidth + 20)}px))`;
+
+        cards.forEach((card, i) => {
+            const offset = (i - index);
+            const rotateY = -offset * 14;
+            const translateZ = -Math.abs(offset) * 80 + (offset === 0 ? 40 : 0);
+            card.style.transform = `perspective(1000px) rotateY(${rotateY}deg) translateZ(${translateZ}px)`;
+            card.style.opacity = Math.max(0.15, 1 - Math.abs(offset) * 0.35);
+        });
+    };
+
+    const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
+    const go = (dir) => {
+        index = clamp(index + dir, 0, cards.length - 1);
+        apply();
+    };
+
+    // Swipe
+    let startX = 0; let dragging = false;
+    rail.addEventListener('pointerdown', (e) => { dragging = true; startX = e.clientX; rail.setPointerCapture(e.pointerId); });
+    rail.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) > 40) {
+            go(dx < 0 ? 1 : -1);
+            dragging = false;
+        }
+    });
+    window.addEventListener('pointerup', () => { dragging = false; });
+    window.addEventListener('resize', apply, { passive: true });
+
+    // autoplay doux
+    const startAutoplay = () => {
+        if (autoplayTimer) return;
+        autoplayTimer = setInterval(() => {
+            index = (index + 1) % cards.length;
+            apply();
+        }, 1600);
+    };
+    const stopAutoplay = () => { if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; } };
+    const restartAutoplay = () => { stopAutoplay(); startAutoplay(); };
+    rail.closest('.certifications-3d').addEventListener('mouseenter', stopAutoplay);
+    rail.closest('.certifications-3d').addEventListener('mouseleave', startAutoplay);
+
+    apply();
+    startAutoplay();
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const track = document.getElementById("certSliderTrack");
+    const dotsContainer = document.getElementById("certDots");
+    const slides = document.querySelectorAll(".slide");
+
+    // Générer automatiquement les dots
+    dotsContainer.innerHTML = ""; // Vide le container pour éviter les doublons
+    slides.forEach((slide, i) => {
+        const dot = document.createElement("div");
+        dot.classList.add("slider-dot");
+        if(i === 0) dot.classList.add("active");
+        dot.dataset.slide = i;
+        dotsContainer.appendChild(dot);
+
+        // Clic sur dot
+        dot.addEventListener("click", () => {
+            goToSlide(i);
+            startAutoSlide();
+        });
+    });
+
+    let currentIndex = 0;
+    let autoSlide;
+
+    function goToSlide(index) {
+        currentIndex = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        const dots = dotsContainer.querySelectorAll(".slider-dot");
+        dots.forEach((d, i) => d.classList.toggle("active", i === currentIndex));
+    }
+
+    function startAutoSlide() {
+        stopAutoSlide();
+        autoSlide = setInterval(() => goToSlide(currentIndex + 1), 4000);
+    }
+
+    function stopAutoSlide() {
+        clearInterval(autoSlide);
+    }
+
+    goToSlide(0);
+    startAutoSlide();
 });
+
+
+// Précharge toutes les images avant le début du slide
+document.querySelectorAll('.single-cert-card img').forEach(img => {
+  const preload = new Image();
+  preload.src = img.src;
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".slide");
+  const dotsContainer = document.getElementById("certDots");
+
+  // Vider les dots existants
+  dotsContainer.innerHTML = "";
+
+  // Créer un dot par slide
+  slides.forEach((slide, i) => {
+    const dot = document.createElement("div");
+    dot.classList.add("slider-dot");
+    if (i === 0) dot.classList.add("active"); // Le premier actif
+    dot.dataset.slide = i;
+    dotsContainer.appendChild(dot);
+
+    // Ajouter la navigation au clic
+    dot.addEventListener("click", () => {
+      document.getElementById("certSliderTrack").style.transform = `translateX(-${i * 100}%)`;
+      dotsContainer.querySelectorAll(".slider-dot").forEach(d => d.classList.remove("active"));
+      dot.classList.add("active");
+    });
+  });
+});
+
+
+
+
+
+
 
 
     </script>
