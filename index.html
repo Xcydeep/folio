@@ -1923,6 +1923,215 @@
   }
 }
 
+
+
+
+//* === NOUVELLE VERSION AMÉLIORÉE === */
+.certifications-slider-alt {
+  position: relative;
+  max-width: 900px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+
+
+.slider-track-alt {
+  display: flex;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.slide-alt {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.cert-card-alt {
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(15, 15, 27, 0.6);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(138, 99, 210, 0.2);
+  transition: all 0.3s ease;
+}
+
+.cert-card-alt:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-shadow);
+}
+
+.cert-card-alt img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.cert-card-alt:hover img {
+  transform: scale(1.02);
+}
+
+
+/* === DOTMARKS AMÉLIORÉS === */
+.slider-dotmarks-alt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+  padding: 15px;
+ 
+ 
+}
+
+.slider-dotmark-alt {
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, var(--gray-color), #6b7280);
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+.slider-dotmark-alt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.slider-dotmark-alt:hover {
+  transform: scale(1.4);
+  background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+  box-shadow: 0 0 15px var(--accent-color);
+}
+
+.slider-dotmark-alt:hover::before {
+  left: 100%;
+}
+
+.slider-dotmark-alt.active {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  transform: scale(1.6);
+  box-shadow: 0 0 20px var(--primary-color), 
+              0 0 30px rgba(138, 99, 210, 0.4);
+  border-color: var(--light-accent);
+  animation: dotmark-pulse 2s infinite;
+}
+
+@keyframes dotmark-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--primary-color), 
+                0 0 30px rgba(138, 99, 210, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px var(--primary-color), 
+                0 0 40px rgba(138, 99, 210, 0.6);
+  }
+}
+
+
+
+.current-slide {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.counter-separator {
+  color: var(--accent-color);
+}
+
+.total-slides {
+  color: var(--light-color);
+}
+
+/* === ADAPTATION MOBILE AMÉLIORÉE === */
+@media (max-width: 768px) {
+  .certifications-slider-alt {
+    margin: 30px auto 0;
+    padding: 0 15px;
+  }
+  
+ 
+  .cert-card-alt {
+    height: 300px;
+    padding: 15px;
+  }
+  
+  
+  
+  .slider-dotmarks-alt {
+    gap: 12px;
+    margin-top: 25px;
+    padding: 12px;
+  }
+  
+  .slider-dotmark-alt {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .slider-dotmark-alt.active {
+    width: 16px;
+    height: 16px;
+  }
+  
+  
+}
+
+@media (max-width: 480px) {
+  .cert-card-alt {
+    height: 250px;
+    padding: 10px;
+  }
+  
+  .slider-nav-btn {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .slider-dotmarks-alt {
+    gap: 10px;
+    margin-top: 20px;
+    padding: 10px;
+  }
+  
+  .slider-dotmark-alt {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .slider-dotmark-alt.active {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* BOUTONS DE NAVIGATION */
+.slider-nav-btn { display: none; }
+
+/* COMPTEUR DE SLIDES */
+.slide-counter { display: none; }
+
     </style>
 </head>
 
@@ -2207,53 +2416,68 @@
 
     <!-- Certifications (section séparée) -->
    <!-- Certifications Section -->
-<section class="section" id="certifications">
+<!-- Nouvelle section dotmarks améliorée -->
+<section class="section" id="certifications-alt">
     <div class="section-divider"></div>
     <div class="container">
-        <div class="section-title" style="margin-bottom:32px;">
-            <h2 style="font-family: 'Orbitron',sans-serif;letter-spacing:2.5px;font-size:2.3rem;margin-bottom:20px;">Certifications</h2>
-            <p style="color:var(--gray-color);font-size:1rem;max-width:600px;margin:0 auto 3px auto;font-weight:300;">Mes preuves de réussite dans divers programmes.</p>
-        </div>
-        
-        <div class="certifications-slider">
-            <div class="slider-container">
-                <div class="slider-track" id="certSliderTrack">
-                     <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="e7494613-2183-4194-a156-4091769767bc.jpg" alt="Certification 1">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="fc6bda7d-08b1-4e67-8410-2c4ddb6e15df.jpg" alt="Certification 1">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="73c1cdf1-e726-4af5-b6f6-842ffd7c0e5d.jpg" alt="Certification 2">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="8cfe4772-acdd-40ae-8f38-c06411c10e69.jpg" alt="Certification 3">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="2768cdeb-f44f-4fed-a839-c700290e299e.jpg" alt="Certification 4">
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-dots" id="certDots">
-                    <div class="slider-dot active" data-slide="0"></div>
-                    <div class="slider-dot" data-slide="1"></div>
-                    <div class="slider-dot" data-slide="2"></div>
-                </div>
+      <div class="section-title" style="margin-bottom:32px;">
+        <h2 style="font-family: 'Orbitron',sans-serif;letter-spacing:2.5px;font-size:2.3rem;margin-bottom:20px;">
+          Certifications
+        </h2>
+        <p style="color:var(--gray-color);font-size:1rem;max-width:600px;margin:0 auto 3px auto;font-weight:300;">
+          Mes preuves de réussite dans divers programmes.
+        </p>
+      </div>
+  
+      <div class="certifications-slider-alt">
+        <div class="slider-container-alt">
+          <!-- Boutons de navigation -->
+          <button class="slider-nav-btn prev-btn" aria-label="Slide précédent">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          
+          <div class="slider-track-alt" id="certSliderTrackAlt">
+            <div class="slide-alt">
+              <div class="cert-card-alt">
+                <img src="e7494613-2183-4194-a156-4091769767bc.jpg" alt="Certification 1">
+              </div>
             </div>
+            <div class="slide-alt">
+              <div class="cert-card-alt">
+                <img src="fc6bda7d-08b1-4e67-8410-2c4ddb6e15df.jpg" alt="Certification 2">
+              </div>
+            </div>
+            <div class="slide-alt">
+              <div class="cert-card-alt">
+                <img src="73c1cdf1-e726-4af5-b6f6-842ffd7c0e5d.jpg" alt="Certification 3">
+              </div>
+            </div>
+            <div class="slide-alt">
+              <div class="cert-card-alt">
+                <img src="8cfe4772-acdd-40ae-8f38-c06411c10e69.jpg" alt="Certification 4">
+              </div>
+            </div>
+            <div class="slide-alt">
+              <div class="cert-card-alt">
+                <img src="2768cdeb-f44f-4fed-a839-c700290e299e.jpg" alt="Certification 5">
+              </div>
+            </div>
+          </div>
+  
         </div>
+  
+        <!-- Les nouveaux dotmarks améliorés -->
+        <div class="slider-dotmarks-alt" id="certDotmarksAlt"></div>
+        
+        <!-- Compteur de slides -->
+        <div class="slide-counter">
+          <span class="current-slide">1</span>
+          <span class="counter-separator">/</span>
+          <span class="total-slides">5</span>
+        </div>
+      </div>
     </div>
-</section>
-
+  </section>
     <!-- Contact Section -->
    <section class="section" id="contact">
     <div class="section-divider"></div>
@@ -3026,7 +3250,291 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// === SLIDER 3D FUTURISTE SOBRE ===
+function setupCertificationsSliderAlt() {
+  console.log("🌙 Initialisation du slider 3D sobre...");
 
+  const track = document.getElementById("certSliderTrackAlt");
+  const slides = document.querySelectorAll(".slide-alt");
+  const dotsContainer = document.getElementById("certDotmarksAlt");
+  const section = document.getElementById("certifications-alt");
+
+  let currentIndex = 0;
+  let autoSlideInterval;
+  let isAnimating = false;
+  let isSectionVisible = false;
+  let lastEffect = '';
+
+  // 🔹 Création des dotmarks
+  slides.forEach((_, i) => {
+    const dot = document.createElement("div");
+    dot.classList.add("slider-dotmark-alt");
+    if (i === 0) dot.classList.add("active");
+    dot.setAttribute("data-index", i);
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll(".slider-dotmark-alt");
+
+  // 🔹 Effets 3D sobres violet/noir
+  const subtle3DEffects = {
+    ghostSlide: {
+      in: {
+        transform: 'translateX(0) scale(1) rotateY(0deg)',
+        opacity: '1',
+        filter: 'brightness(1)'
+      },
+      out: {
+        transform: 'translateX(-100%) scale(0.9) rotateY(-15deg)',
+        opacity: '0',
+        filter: 'brightness(0.7)'
+      },
+      duration: 1200
+    },
+    depthFade: {
+      in: {
+        transform: 'scale(1) translateZ(0px) rotateX(0deg)',
+        opacity: '1',
+        filter: 'brightness(1)'
+      },
+      out: {
+        transform: 'scale(0.85) translateZ(-80px) rotateX(10deg)',
+        opacity: '0',
+        filter: 'brightness(0.6)'
+      },
+      duration: 1300
+    },
+    softRotate: {
+      in: {
+        transform: 'scale(1) rotateY(0deg) translateZ(0px)',
+        opacity: '1',
+        filter: 'brightness(1)'
+      },
+      out: {
+        transform: 'scale(0.9) rotateY(25deg) translateZ(-60px)',
+        opacity: '0',
+        filter: 'brightness(0.8)'
+      },
+      duration: 1100
+    },
+    gentleFloat: {
+      in: {
+        transform: 'scale(1) translateY(0px) rotateZ(0deg)',
+        opacity: '1',
+        filter: 'brightness(1)'
+      },
+      out: {
+        transform: 'scale(0.88) translateY(30px) rotateZ(-5deg)',
+        opacity: '0',
+        filter: 'brightness(0.75)'
+      },
+      duration: 1400
+    },
+    matrixFlow: {
+      in: {
+        transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
+        opacity: '1',
+        filter: 'brightness(1)'
+      },
+      out: {
+        transform: 'matrix3d(0.95,0.05,0,0,0,0.95,0,0,0,0,1,0,0,0,0,1)',
+        opacity: '0',
+        filter: 'brightness(0.7)'
+      },
+      duration: 1250
+    }
+  };
+
+  // 🔹 Sélection d'effet aléatoire
+  function getRandom3DEffect() {
+    const effectNames = Object.keys(subtle3DEffects);
+    let randomEffect;
+    
+    do {
+      randomEffect = effectNames[Math.floor(Math.random() * effectNames.length)];
+    } while (randomEffect === lastEffect && effectNames.length > 1);
+    
+    lastEffect = randomEffect;
+    return subtle3DEffects[randomEffect];
+  }
+
+  // 🔹 Transition 3D améliorée
+  function goToSlide(newIndex) {
+    if (isAnimating) return;
+    
+    isAnimating = true;
+    const oldIndex = currentIndex;
+    currentIndex = newIndex;
+
+    const effect = getRandom3DEffect();
+
+    // Appliquer les effets 3D
+    slides.forEach((slide, index) => {
+      const img = slide.querySelector('img');
+      
+      // Transition fluide
+      img.style.transition = `all ${effect.duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+      
+      if (index === currentIndex) {
+        // Image active - entrée
+        Object.assign(img.style, effect.in);
+        img.style.zIndex = '10';
+      } else if (index === oldIndex) {
+        // Image précédente - sortie
+        Object.assign(img.style, effect.out);
+        img.style.zIndex = '5';
+      } else {
+        // Autres images - état caché
+        img.style.transform = 'scale(0.8) translateZ(-100px)';
+        img.style.opacity = '0';
+        img.style.zIndex = '1';
+      }
+    });
+
+    // Animation du track
+    track.style.transition = `transform ${effect.duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Mettre à jour les dotmarks
+    dots.forEach((dot, index) => {
+      dot.classList.remove("active");
+      if (index === currentIndex) {
+        dot.classList.add("active");
+      }
+    });
+
+    // Réinitialiser l'animation
+    setTimeout(() => {
+      isAnimating = false;
+    }, effect.duration);
+  }
+
+  // 🔹 Timing aléatoire amélioré
+  function startAutoSlide() {
+    stopAutoSlide();
+    
+    if (!isSectionVisible) return;
+    
+    function scheduleNextSlide() {
+      if (!isSectionVisible) return;
+      
+      // Timing aléatoire entre 3 et 5 secondes
+      const nextTime = 3000 + Math.random() * 2000;
+      
+      autoSlideInterval = setTimeout(() => {
+        if (!isAnimating && isSectionVisible) {
+          const nextIndex = (currentIndex + 1) % slides.length;
+          goToSlide(nextIndex);
+          scheduleNextSlide();
+        }
+      }, nextTime);
+    }
+    
+    scheduleNextSlide();
+  }
+
+  function stopAutoSlide() {
+    if (autoSlideInterval) {
+      clearTimeout(autoSlideInterval);
+      autoSlideInterval = null;
+    }
+  }
+
+  // 🔹 Détection de visibilité
+  function checkSectionVisibility() {
+    if (!section) return;
+    
+    const rect = section.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    
+    const isVisible = (
+      rect.top <= windowHeight * 0.7 &&
+      rect.bottom >= windowHeight * 0.3
+    );
+    
+    if (isVisible && !isSectionVisible) {
+      isSectionVisible = true;
+      console.log("👁️ Section certifications visible");
+      startAutoSlide();
+      
+    } else if (!isVisible && isSectionVisible) {
+      isSectionVisible = false;
+      console.log("👻 Section certifications invisible");
+      stopAutoSlide();
+    }
+  }
+
+  // 🔹 Initialisation corrigée pour garantir la visibilité
+  function initializeStyles() {
+    // S'assurer que TOUTES les images sont positionnées correctement
+    slides.forEach((slide, index) => {
+      const img = slide.querySelector('img');
+      
+      // Styles de base essentiels
+      Object.assign(img.style, {
+        position: 'relative', // Important pour la superposition
+        width: '100%',
+        height: '100%',
+        objectFit: 'contain',
+        display: 'block',
+        opacity: index === 0 ? '1' : '0', // Seule la première image visible
+        transform: index === 0 ? 'scale(1) rotateY(0deg)' : 'scale(0.8) translateZ(-100px)',
+        transition: 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        willChange: 'transform, opacity'
+      });
+    });
+
+    // Position initiale du track
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    track.style.transition = 'transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+    // Forcer un reflow pour s'assurer que les styles sont appliqués
+    track.offsetHeight;
+  }
+
+  // 🔹 Événements
+  let scrollTimeout;
+  function throttledCheckVisibility() {
+    if (!scrollTimeout) {
+      scrollTimeout = setTimeout(() => {
+        checkSectionVisibility();
+        scrollTimeout = null;
+      }, 100);
+    }
+  }
+
+  window.addEventListener('scroll', throttledCheckVisibility);
+  window.addEventListener('resize', throttledCheckVisibility);
+
+  // 🔹 Initialisation
+  setTimeout(() => {
+    initializeStyles();
+    checkSectionVisibility();
+    
+    // S'assurer que l'image 1 est visible
+    const firstImg = slides[0].querySelector('img');
+    firstImg.style.opacity = '1';
+    firstImg.style.transform = 'scale(1) rotateY(0deg)';
+    
+  }, 150);
+
+  console.log("🎯 Slider 3D sobre initialisé");
+}
+
+// === INITIALISATION ===
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("🚀 Chargement du slider 3D...");
+  setupCertificationsSliderAlt();
+});
+
+// Redémarrage si nécessaire
+setTimeout(() => {
+  const firstImg = document.querySelector('.slide-alt img');
+  if (firstImg && firstImg.style.opacity !== '1') {
+    console.log("🔄 Correction de la visibilité...");
+    setupCertificationsSliderAlt();
+  }
+}, 2000);
 
 
 
