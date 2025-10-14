@@ -1895,7 +1895,7 @@
 
 /* Retire totalement les points (dots) */
 .slider-dots {
-  display: none !important;
+  display: flex !important;
 }
 
 /* Adaptation mobile */
@@ -1923,6 +1923,265 @@
   }
 }
 
+
+
+
+
+.certifications-slider-soft {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  height: 320px;
+}
+
+.slider-container-soft {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slider-track-soft {
+  display: flex;
+  transition: transform 0.8s ease-in-out;
+  height: 100%;
+}
+
+.slide-soft {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cert-card-soft {
+  width: 80%;
+  height: 90%;
+  border: 2px solid rgba(0,0,0,0.1);
+  border-radius: 14px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.cert-card-soft img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Dot marks */
+.slider-dots-soft {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.slider-dot-soft {
+  width: 12px;
+  height: 12px;
+  background-color: #bbb;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.slider-dot-soft.active {
+  background-color: #333;
+  transform: scale(1.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === NOUVELLE VERSION AMÉLIORÉE === */
+.certifications-slider-alt {
+  position: relative;
+  max-width: 900px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+.slider-track-alt {
+  display: flex;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.slide-alt {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.cert-card-alt {
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(15, 15, 27, 0.6);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(138, 99, 210, 0.2);
+  transition: all 0.3s ease;
+}
+
+.cert-card-alt:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-shadow);
+}
+
+.cert-card-alt img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.cert-card-alt:hover img {
+  transform: scale(1.02);
+}
+
+/* === DOTMARKS AMÉLIORÉS === */
+.slider-dotmarks-alt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.slider-dotmark-alt {
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, var(--gray-color), #6b7280);
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-dotmark-alt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.slider-dotmark-alt:hover {
+  transform: scale(1.4);
+  background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+  box-shadow: 0 0 15px var(--accent-color);
+}
+
+.slider-dotmark-alt:hover::before {
+  left: 100%;
+}
+
+.slider-dotmark-alt.active {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  transform: scale(1.6);
+  box-shadow: 0 0 20px var(--primary-color), 
+              0 0 30px rgba(138, 99, 210, 0.4);
+  animation: dotmark-pulse 2s infinite;
+}
+
+@keyframes dotmark-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--primary-color), 
+                0 0 30px rgba(138, 99, 210, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px var(--primary-color), 
+                0 0 40px rgba(138, 99, 210, 0.6);
+  }
+}
+
+/* === ADAPTATION MOBILE AMÉLIORÉE === */
+@media (max-width: 768px) {
+  .certifications-slider-alt {
+    margin: 30px auto 0;
+    padding: 0 15px;
+  }
+  
+  .cert-card-alt {
+    height: 300px;
+    padding: 15px;
+  }
+  
+  .slider-dotmarks-alt {
+    gap: 12px;
+    margin-top: 25px;
+  }
+  
+  .slider-dotmark-alt {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .slider-dotmark-alt.active {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cert-card-alt {
+    height: 250px;
+    padding: 10px;
+  }
+  
+  .slider-dotmarks-alt {
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .slider-dotmark-alt {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .slider-dotmark-alt.active {
+    width: 14px;
+    height: 14px;
+  }
+}
     </style>
 </head>
 
@@ -2206,49 +2465,53 @@
     </section>
 
     <!-- Certifications (section séparée) -->
-   <!-- Certifications Section -->
-<section class="section" id="certifications">
-    <div class="section-divider"></div>
-    <div class="container">
-        <div class="section-title" style="margin-bottom:32px;">
-            <h2 style="font-family: 'Orbitron',sans-serif;letter-spacing:2.5px;font-size:2.3rem;margin-bottom:20px;">Certifications</h2>
-            <p style="color:var(--gray-color);font-size:1rem;max-width:600px;margin:0 auto 3px auto;font-weight:300;">Mes preuves de réussite dans divers programmes.</p>
-        </div>
-        
-        <div class="certifications-slider">
-            <div class="slider-container">
-                <div class="slider-track" id="certSliderTrack">
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="fc6bda7d-08b1-4e67-8410-2c4ddb6e15df.jpg" alt="Certification 1">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="73c1cdf1-e726-4af5-b6f6-842ffd7c0e5d.jpg" alt="Certification 2">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="8cfe4772-acdd-40ae-8f38-c06411c10e69.jpg" alt="Certification 3">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="single-cert-card">
-                            <img src="2768cdeb-f44f-4fed-a839-c700290e299e.jpg" alt="Certification 4">
-                        </div>
-                    </div>
+    <section class="section" id="certifications-alt">
+        <div class="section-divider"></div>
+        <div class="container">
+          <div class="section-title" style="margin-bottom:32px;">
+            <h2 style="font-family: 'Orbitron',sans-serif;letter-spacing:2.5px;font-size:2.3rem;margin-bottom:20px;">
+              Certifications
+            </h2>
+            <p style="color:var(--gray-color);font-size:1rem;max-width:600px;margin:0 auto 3px auto;font-weight:300;">
+              Mes preuves de réussite dans divers programmes.
+            </p>
+          </div>
+      
+          <div class="certifications-slider-alt">
+            <div class="slider-track-alt" id="certSliderTrackAlt">
+              <div class="slide-alt">
+                <div class="cert-card-alt">
+                  <img src="e7494613-2183-4194-a156-4091769767bc.jpg" alt="Certification 1">
                 </div>
-                <div class="slider-dots" id="certDots">
-                    <div class="slider-dot active" data-slide="0"></div>
-                    <div class="slider-dot" data-slide="1"></div>
-                    <div class="slider-dot" data-slide="2"></div>
+              </div>
+              <div class="slide-alt">
+                <div class="cert-card-alt">
+                  <img src="fc6bda7d-08b1-4e67-8410-2c4ddb6e15df.jpg" alt="Certification 2">
                 </div>
+              </div>
+              <div class="slide-alt">
+                <div class="cert-card-alt">
+                  <img src="73c1cdf1-e726-4af5-b6f6-842ffd7c0e5d.jpg" alt="Certification 3">
+                </div>
+              </div>
+              <div class="slide-alt">
+                <div class="cert-card-alt">
+                  <img src="8cfe4772-acdd-40ae-8f38-c06411c10e69.jpg" alt="Certification 4">
+                </div>
+              </div>
+              <div class="slide-alt">
+                <div class="cert-card-alt">
+                  <img src="2768cdeb-f44f-4fed-a839-c700290e299e.jpg" alt="Certification 5">
+                </div>
+              </div>
             </div>
+      
+            <!-- Les dotmarks sans cadre -->
+            <div class="slider-dotmarks-alt" id="certDotmarksAlt"></div>
+          </div>
         </div>
-    </div>
-</section>
-
+      </section>
+      
     <!-- Contact Section -->
    <section class="section" id="contact">
     <div class="section-divider"></div>
@@ -3022,9 +3285,252 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("certSliderTrackSoft");
+  const slides = document.querySelectorAll(".slide-soft");
+  const dotsContainer = document.getElementById("certDotsSoft");
+
+  let currentIndex = 0;
+  let autoSlide;
+
+  // Créer les dots
+  dotsContainer.innerHTML = "";
+  slides.forEach((slide, i) => {
+    const dot = document.createElement("div");
+    dot.classList.add("slider-dot-soft");
+    if (i === 0) dot.classList.add("active");
+    dot.dataset.slide = i;
+    dotsContainer.appendChild(dot);
+
+    dot.addEventListener("click", () => goToSlide(i));
+  });
+
+  function goToSlide(index) {
+    currentIndex = index;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Mettre à jour les dots
+    const dots = dotsContainer.querySelectorAll(".slider-dot-soft");
+    dots.forEach((d, i) => d.classList.toggle("active", i === currentIndex));
+  }
+
+  function startAutoSlide() {
+    stopAutoSlide();
+    autoSlide = setInterval(() => {
+      const nextIndex = (currentIndex + 1) % slides.length;
+      goToSlide(nextIndex);
+    }, 3500);
+  }
+
+  function stopAutoSlide() {
+    if (autoSlide) clearInterval(autoSlide);
+  }
+
+  goToSlide(0);
+  startAutoSlide();
+});
 
 
 
+
+
+
+
+
+
+// === SLIDER AMÉLIORÉ AVEC FONCTIONNALITÉS AVANCÉES ===
+// === SLIDER AMÉLIORÉ AVEC FONCTIONNALITÉS AVANCÉES ===
+// === SLIDER AMÉLIORÉ AVEC FONCTIONNALITÉS AVANCÉES ===
+function setupCertificationsSliderAlt() {
+  console.log("🔄 Initialisation du slider amélioré...");
+  
+  const track = document.getElementById("certSliderTrackAlt");
+  const slides = document.querySelectorAll(".slide-alt");
+  const dotsContainer = document.getElementById("certDotmarksAlt");
+
+  let currentIndex = 0;
+  let autoSlideInterval;
+  let isAnimating = false;
+
+  // Vérification que tous les éléments existent
+  if (!track || !slides.length || !dotsContainer) {
+    console.error("❌ Éléments du slider non trouvés");
+    return;
+  }
+
+  console.log(`📊 Nombre de slides trouvés: ${slides.length}`);
+
+  // 🔹 Création dynamique des dotmarks
+  slides.forEach((_, i) => {
+    const dot = document.createElement("div");
+    dot.classList.add("slider-dotmark-alt");
+    if (i === 0) dot.classList.add("active");
+    dot.setAttribute("data-index", i);
+    dot.setAttribute("aria-label", `Aller à la certification ${i + 1}`);
+    
+    dot.addEventListener("click", () => {
+      if (!isAnimating) {
+        console.log(`🎯 Navigation vers le slide ${i + 1}`);
+        goToSlide(i);
+        restartAutoSlide();
+      }
+    });
+    
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll(".slider-dotmark-alt");
+
+  // 🔹 Fonction de navigation CORRIGÉE
+  function goToSlide(index) {
+    if (isAnimating) return;
+    
+    isAnimating = true;
+    currentIndex = index;
+    
+    console.log(`➡️ Déplacement vers le slide ${index + 1}`);
+    
+    // Animation fluide - CORRECTION : utilisation correcte du pourcentage
+    track.style.transform = `translateX(-${index * 100}%)`;
+
+    // Mettre à jour les dotmarks
+    dots.forEach(dot => dot.classList.remove("active"));
+    if (dots[index]) {
+      dots[index].classList.add("active");
+    }
+    
+    // Réinitialiser l'animation
+    setTimeout(() => {
+      isAnimating = false;
+    }, 600);
+  }
+
+  // 🔹 Navigation suivante CORRIGÉE
+  function nextSlide() {
+    if (!isAnimating) {
+      const nextIndex = (currentIndex + 1) % slides.length;
+      console.log(`🔄 Slide suivant: ${currentIndex + 1} → ${nextIndex + 1}`);
+      goToSlide(nextIndex);
+      restartAutoSlide();
+    }
+  }
+
+  // 🔹 Navigation précédente CORRIGÉE
+  function prevSlide() {
+    if (!isAnimating) {
+      const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+      console.log(`🔙 Slide précédent: ${currentIndex + 1} → ${prevIndex + 1}`);
+      goToSlide(prevIndex);
+      restartAutoSlide();
+    }
+  }
+
+  // 🔹 Défilement automatique CORRIGÉ
+  function startAutoSlide() {
+    stopAutoSlide();
+    autoSlideInterval = setInterval(() => {
+      if (!isAnimating && slides.length > 0) {
+        nextSlide();
+      }
+    }, 5000); // 5 secondes
+    console.log("▶️ Défilement automatique démarré");
+  }
+
+  function stopAutoSlide() {
+    if (autoSlideInterval) {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = null;
+      console.log("⏸️ Défilement automatique arrêté");
+    }
+  }
+
+  function restartAutoSlide() {
+    stopAutoSlide();
+    startAutoSlide();
+  }
+
+  // 🔹 Swipe sur mobile CORRIGÉ
+  let startX = 0;
+  let isDragging = false;
+  
+  track.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    stopAutoSlide();
+  });
+
+  track.addEventListener("touchmove", (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+  });
+
+  track.addEventListener("touchend", (e) => {
+    if (!isDragging) return;
+    
+    const endX = e.changedTouches[0].clientX;
+    const diffX = startX - endX;
+    
+    if (Math.abs(diffX) > 50) {
+      if (diffX > 0) {
+        console.log("📱 Swipe gauche → slide suivant");
+        nextSlide();
+      } else {
+        console.log("📱 Swipe droite → slide précédent");
+        prevSlide();
+      }
+    }
+    
+    isDragging = false;
+    restartAutoSlide();
+  });
+
+  // 🔹 Pause au survol
+  const slider = document.querySelector(".certifications-slider-alt");
+  if (slider) {
+    slider.addEventListener("mouseenter", stopAutoSlide);
+    slider.addEventListener("mouseleave", startAutoSlide);
+  }
+
+  // 🔹 Navigation au clavier
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      prevSlide();
+    } else if (e.key === "ArrowRight") {
+      nextSlide();
+    }
+  });
+
+  // 🔹 Initialisation finale
+  startAutoSlide();
+  
+  console.log(`🎉 Slider amélioré initialisé avec succès! ${slides.length} slides disponibles`);
+}
+
+// === INITIALISATION AMÉLIORÉE ===
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("🚀 Chargement du slider amélioré...");
+  
+  // Attendre que le DOM soit complètement chargé
+  setTimeout(() => {
+    setupCertificationsSliderAlt();
+  }, 100);
+});
+
+// Backup avec vérification plus robuste
+setTimeout(() => {
+  console.log("⏰ Vérification backup du slider...");
+  
+  // Vérifier si le slider fonctionne correctement
+  const activeSlide = document.querySelector(".slider-dotmark-alt.active");
+  const track = document.getElementById("certSliderTrackAlt");
+  
+  if (!activeSlide || !track) {
+    console.log("🔄 Relance du slider...");
+    setupCertificationsSliderAlt();
+  } else {
+    console.log("✅ Slider fonctionne correctement");
+  }
+}, 2000);
     </script>
 </body>
 </html>
